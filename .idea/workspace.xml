@@ -12,7 +12,11 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f953faa3-9601-484e-b5fa-ee9f5b862d03" name="Default" comment="" />
+    <list default="true" id="f953faa3-9601-484e-b5fa-ee9f5b862d03" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/nikita.h" afterPath="$PROJECT_DIR$/core/nikita.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
+    </list>
     <ignored path="nikita-render.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +36,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="nikita_scene.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="nikita_scene.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/nikita_scene.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="93" selection-start-line="12" selection-start-column="93" selection-end-line="12" selection-end-column="93" />
+            <state relative-caret-position="255">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="nikita.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/nikita.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#156#175#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="32" column="1" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+              <folding>
+                <marker date="1460229093000" expanded="true" signature="166:933" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -47,7 +95,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
               <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1460216930000" expanded="true" signature="194:374" placeholder="{...}" />
+                <marker date="1460216930000" expanded="true" signature="214:371" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -57,7 +108,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
               <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-              <folding />
+              <folding>
+                <marker date="1460216930000" expanded="true" signature="135:254" placeholder="{...}" />
+                <marker date="1460216930000" expanded="true" signature="356:724" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,32 +126,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sampler.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/sampler.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="sceneParser.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/sceneParser.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="920">
               <caret line="234" column="55" selection-start-line="234" selection-start-column="55" selection-end-line="234" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pugixml.cpp" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/include/OpenImageIO/pugixml.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="3822" column="0" selection-start-line="3822" selection-start-column="0" selection-end-line="3822" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1460218526000" expanded="true" signature="207:1015" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="1082:1504" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="1572:3028" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="3099:4101" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="4169:4535" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="4600:5062" placeholder="{...}" />
+                <marker date="1460218526000" expanded="true" signature="5126:5788" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,34 +149,27 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
               <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="transform.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/transform.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sceneParser.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/sceneParser.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
               <folding>
-                <element signature="e#120#147#0" expanded="true" />
+                <marker date="1460214463000" expanded="true" signature="304:2037" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="330:1980" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="2148:2294" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="2359:2508" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="2581:2751" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="2825:2932" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="3013:3082" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="3172:3217" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="3309:3354" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="3415:3568" placeholder="{...}" />
+                <marker date="1460214463000" expanded="true" signature="3631:3674" placeholder="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -152,13 +187,10 @@
         <option value="$PROJECT_DIR$/core/sampler.h" />
         <option value="$PROJECT_DIR$/core/sampler.cpp" />
         <option value="$PROJECT_DIR$/core/camera.h" />
-        <option value="$PROJECT_DIR$/main.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/core/sensor.h" />
         <option value="$PROJECT_DIR$/core/ray.h" />
         <option value="$PROJECT_DIR$/numerical/quadratic.h" />
         <option value="$PROJECT_DIR$/core/sensor.cpp" />
-        <option value="$PROJECT_DIR$/core/nikita.h" />
         <option value="$PROJECT_DIR$/core/camera.cpp" />
         <option value="$PROJECT_DIR$/core/ray.cpp" />
         <option value="$PROJECT_DIR$/core/scene.h" />
@@ -178,6 +210,9 @@
         <option value="$PROJECT_DIR$/util/stringUtils.cpp" />
         <option value="$PROJECT_DIR$/util/sceneParser.cpp" />
         <option value="$PROJECT_DIR$/test/nikita_scene.xml" />
+        <option value="$PROJECT_DIR$/core/nikita.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -192,7 +227,7 @@
     <option name="width" value="1278" />
     <option name="height" value="1417" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -501,15 +536,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1278" height="1417" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1517997" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54451036" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19732937" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23738873" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23738873" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -519,7 +555,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19732937" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -566,13 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3599">
           <caret line="1727" column="0" selection-start-line="1727" selection-start-column="0" selection-end-line="1727" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -634,21 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/numerical/quadratic.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -684,13 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/nikita.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -751,6 +757,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
           <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -766,6 +773,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -857,7 +865,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1460214463000" expanded="true" signature="127:205" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="319:322" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="455:458" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="537:694" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="760:890" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="957:1096" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="1159:1418" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="1481:1739" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="1802:2061" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2165:2849" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2938:3340" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3407:3582" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3628:3706" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3752:3782" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3831:3868" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -866,7 +890,7 @@
         <state relative-caret-position="279">
           <caret line="39" column="50" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
           <folding>
-            <element signature="e#120#147#0" expanded="true" />
+            <element signature="e#120#147#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -891,7 +915,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-          <folding />
+          <folding>
+            <marker date="1460216930000" expanded="true" signature="135:254" placeholder="{...}" />
+            <marker date="1460216930000" expanded="true" signature="356:724" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -899,7 +926,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1460216930000" expanded="true" signature="194:374" placeholder="{...}" />
+            <marker date="1460216930000" expanded="true" signature="214:371" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -907,7 +937,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
-          <folding />
+          <folding>
+            <marker date="1460214463000" expanded="true" signature="304:2037" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="330:1980" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2148:2294" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2359:2508" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2581:2751" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="2825:2932" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3013:3082" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3172:3217" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3309:3354" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3415:3568" placeholder="{...}" />
+            <marker date="1460214463000" expanded="true" signature="3631:3674" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -915,14 +957,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="920">
           <caret line="234" column="55" selection-start-line="234" selection-start-column="55" selection-end-line="234" selection-end-column="55" />
-          <folding />
+          <folding>
+            <marker date="1460218526000" expanded="true" signature="207:1015" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="1082:1504" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="1572:3028" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="3099:4101" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="4169:4535" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="4600:5062" placeholder="{...}" />
+            <marker date="1460218526000" expanded="true" signature="5126:5788" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/nikita_scene.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="93" selection-start-line="12" selection-start-column="93" selection-end-line="12" selection-end-column="93" />
+        <state relative-caret-position="255">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/nikita.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#156#175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="32" column="1" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+          <folding>
+            <marker date="1460229093000" expanded="true" signature="166:933" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding />
         </state>
       </provider>

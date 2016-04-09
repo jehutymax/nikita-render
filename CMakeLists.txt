@@ -1,7 +1,26 @@
-cmake_minimum_required(VERSION 3.4)
+if (NOT APPLE)
+    cmake_minimum_required(VERSION 2.0)
+else(NOT APPLE)
+    cmake_minimum_required(VERSION 3.4)
+endif(NOT APPLE)
+
 project(nikita_render)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+if (NOT APPLE)
+    include_directories(
+            ../3rd_party
+            3rd_party/openimageio/dist/linux64/include
+            3rd_party/tbb/tbb/include)
+
+    link_directories(
+            3rd_party/openimageio/dist/linux64/lib)
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fpermissive")
+else (NOT APPLE) #i.e., it is Apple
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif (NOT APPLE)
+
+
 set(SOURCE_FILES
         main.cpp
         version.h
