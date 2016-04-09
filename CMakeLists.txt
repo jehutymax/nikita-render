@@ -1,0 +1,44 @@
+cmake_minimum_required(VERSION 3.4)
+project(nikita_render)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(SOURCE_FILES
+        main.cpp
+        version.h
+        util/sceneParser.cpp
+        util/sceneParser.h
+        core/transform.h
+        core/shape.h
+        core/nikita.h
+        core/triangleMesh.cpp
+        core/triangleMesh.h
+        util/smfReader.cpp
+        util/smfReader.h
+        util/stringUtils.cpp
+        util/stringUtils.h
+        core/BoundingBox.cpp
+        core/BoundingBox.h
+        util/mathUtils.h
+        core/sphere.cpp
+        core/sphere.h
+        core/ray.cpp
+        core/ray.h
+        numerical/quadratic.h
+        core/scene.cpp
+        core/scene.h
+        core/renderer.cpp
+        core/renderer.h
+        core/camera.cpp
+        core/camera.h
+        core/sensor.cpp
+        core/sensor.h
+        core/sampler.cpp
+        core/sampler.h core/transform.cpp util/cpuTimer.h)
+
+set(TEST_SOURCE_FILES test/main.cpp test/TestShapes.cpp test/TestReaders.cpp util/stringUtils.cpp util/stringUtils.h core/BoundingBox.cpp core/BoundingBox.h core/ray.cpp core/ray.h test/TestNumerical.cpp)
+
+add_executable(nikita_render ${SOURCE_FILES})
+add_executable(nikita_render_tests ${TEST_SOURCE_FILES})
+
+target_link_libraries(nikita_render OpenImageIO)
+target_link_libraries(nikita_render_tests cppunit)
