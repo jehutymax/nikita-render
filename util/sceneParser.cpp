@@ -68,9 +68,6 @@ void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
     // transform
     nikita::TransformPtr t = processTransform(node);
 
-//    t = Transform::getLookAt(Point(0.,0.,+5.), Point(0.,0.,0.), Vector(0.,1.,0.));
-    std::cout << t->get() << std::endl;
-
     // Film
     Node film = node.child("film");
     if (!film)
@@ -85,7 +82,6 @@ void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
         getInteger(film, "width", &w);
         getInteger(film, "height", &h);
         getString(film, "filename", &filename);
-        std::cout << getType(film) << std::endl;
         std::cout << "Width: " << w << "; Height: " << h << std::endl;
         std::cout << "Image to be written: " << filename << std::endl;
 
@@ -94,13 +90,6 @@ void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
 
     // Sampler
     Node sampler = node.child("sampler");
-    if (sampler)
-    {
-        std::cout << "Sampler: " << getType(sampler) << std::endl;
-        int spp;
-        getInteger(sampler, "sampleCount", &spp);
-        std::cout << "Samples per Pixel: " << spp << std::endl;
-    }
 
     // Camera
     float screenDimensions[4] = {-1.f, 1.f, -1.f, 1.f};
@@ -247,16 +236,25 @@ bool sceneParser::hasTransform(const Node &parentNode)
 void sceneParser::createSphere(const OIIO::pugi::xml_node &node)
 {
     OIIO::pugi::xml_node radiusNode = node.find_child_by_attribute("name", "radius");
-    float radius;
+    float radius, phi, zmin, zmax;
     if (radiusNode)
         radius = std::stof(radiusNode.attribute("value").value());
     else
         radius = 2.0;
 
+    if (!getFloat(node, "phi", &phi))
+        phi = 360.0;
+
+    if (!getFloat(node, "zmin", &zmin))
+        zmin = -radius;
+
+    if (!getFloat(node, "zmax", &zmax))
+        zmax = radius;
+
     // Get a transform for the sphere
     TransformPtr pt = processTransform(node);
     TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
-    this->scene->objects.push_back(std::make_shared<Sphere>(pt, ptInv, radius));
+    this->scene->objects.push_back(std::make_shared<Sphere>(pt, ptInv, radius, zmin, zmax, phi));
 }
 
 void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)

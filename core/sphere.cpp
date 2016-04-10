@@ -66,7 +66,31 @@ bool Sphere::intersect(const Ray &r, float *t) const
         if (hit > ray.tMax)
             return false;
     }
-    //std::cout << x0 <<  ", " << x1 <<  std::endl;
+
+    // now let's check if this is an entire sphere,
+    // and if it isn't, verify if the hit still is a hit.
+    Point phi_t = ray(hit);
+    if (phi_t(0) == 0.0f && phi_t(1) == 0.0f)
+        phi_t(0) = 0.00001 * this->radius; // avoid division by zero in the arc tangent of y/x
+
+    float phi = atan2f(phi_t(1), phi_t(0));
+    if (phi < 0.0f)
+        phi += 2.0f * Pi;
+
+    // is this a whole sphere?
+    if ((zMin > -radius && phi_t(2) < zMin) || (zMax < radius && phi_t(2) > zMax) || (phi > phiMax))
+    {
+        if (hit == x1)
+            return false;
+        if (x1 > r.tMax)
+            return false;
+
+        hit = x1;
+
+        if ((zMin > -radius && phi_t(2) < zMin) || (zMax < radius && phi_t(2) > zMax) || (phi > phiMax))
+            return false;
+    }
+
     *t = hit;
     return true;
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0">
+        <shape type="sphere">
+            <float name="radius" value="1.25"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2.5" y="2.5"/>
+            </transform>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.25"/>
+            <float name="phi" value="270.0"/>
+            <transform name="toWorld">
+                <translate x="1.0" y="1.0"/>
+                <scale value="0.65"/>
+            </transform>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.25"/>
+            <float name="phi" value="180.0"/>
+            <transform name="toWorld">
+                <translate x="-1.0" y="1.0"/>
+                <scale value="0.65"/>
+            </transform>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.25"/>
+            <float name="phi" value="90.0"/>
+            <transform name="toWorld">
+                <translate x="-3.0" y="1.0"/>
+                <scale value="0.65"/>
+            </transform>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.55"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2.0" y="-2.5"/>
+                <scale x="3.2"/>
+            </transform>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.55"/>
+            <float name="phi" value="180.0"/>
+            <transform name="toWorld">
+                <translate x="-2.0" y="-2.5"/>
+                <scale x="3.2"/>
+            </transform>
+        </shape>
+        <!-- Instantiate a perspective camera with 45 degrees field of view -->
+        <sensor type="perspective">
+            <!-- Rotate the camera around the Y axis by 180 degrees -->
+            <transform name="toWorld">
+                <lookat origin="0, 0, 15" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="30"/>
+            <!-- Render with 1 sample per pixel using the
+            simple renderer (bw) -->
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <!-- Generate an EXR image at HD resolution -->
+            <film type="png">
+                <integer name="width" value="640"/>
+                <integer name="height" value="640"/>
+                <string name="filename" value="partial_spheres.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>

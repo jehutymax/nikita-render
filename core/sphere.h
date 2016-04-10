@@ -20,9 +20,9 @@ public:
     Sphere(const TransformPtr obj2World, const TransformPtr world2Obj,
            float radius);
     Sphere(const TransformPtr obj2World, const TransformPtr world2Obj,
-        float radius, float z0, float z1, float phi);
+        float radius, float z0, float z1, float phi); // support for partial spheres.
 
-    BoundingBox objectBound() const; // to come...
+    BoundingBox objectBound() const; // implemented, not tested, not in use.
 
     bool isIntersectable();
     bool intersect(const Ray &ray, float *t) const;

@@ -28,6 +28,5 @@ int main(int argc, char* argv[]) {
 
     renderer.render(scene);
 
-    std::cout << ((scene.objects[0].get())->isIntersectable() ? "true" : "false") << std::endl;
     return 0;
 }

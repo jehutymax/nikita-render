@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0">
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/teapot.smf"/>
+            <transform name="toWorld">
+                <!--<rotate z="1" angle="45"/>-->
+                <scale value="1.0"/>
+                <!--<translate x="-1.5"/>-->
+            </transform>
+        </shape>
+        <!-- Instantiate a perspective camera with 45 degrees field of view -->
+        <sensor type="perspective">
+            <!-- Rotate the camera around the Y axis by 180 degrees -->
+            <transform name="toWorld">
+                <lookat origin="0, 0, 12" target="0, -0.5, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="30"/>
+            <!-- Render with 1 sample per pixel using the
+            simple renderer (bw) -->
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <!-- Generate an EXR image at HD resolution -->
+            <film type="png">
+                <integer name="width" value="640"/>
+                <integer name="height" value="640"/>
+                <string name="filename" value="teapot.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>

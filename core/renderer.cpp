@@ -38,11 +38,10 @@ void SimpleRenderer::render(const Scene &scene)
 
             for (int k = 0; k < scene.objects.size(); k++)
             {
-                float t = 0, epsilon = 0;
                 Ray r = ray;
                 if (scene.objects[k]->isIntersectable())
                 {
-                    runIntersectionTest(ray, s, scene.objects[k]);
+                    runIntersectionTest(r, s, scene.objects[k]);
                 }
                 else
                 {
@@ -50,7 +49,7 @@ void SimpleRenderer::render(const Scene &scene)
                     scene.objects[k]->divide(subshapes);
 
                     for (int l = 0; l < subshapes.size(); ++l) {
-                        runIntersectionTest(ray, s, subshapes[l]);
+                        runIntersectionTest(r, s, subshapes[l]);
                     }
 
                 }

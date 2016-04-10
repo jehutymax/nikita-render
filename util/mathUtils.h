@@ -42,11 +42,11 @@ inline int nikita::MathUtils::clamp(int value, int low, int high)
 }
 inline float nikita::MathUtils::toDegrees(float radians)
 {
-    return (180.0/PI) * radians;
+    return (180.0/Pi) * radians;
 }
 inline float nikita::MathUtils::toRadians(float degrees)
 {
-    return (PI/180.0) * degrees;
+    return (Pi/180.0) * degrees;
 }
 inline bool nikita::MathUtils::almostEqual(float ref, float value)
 {
