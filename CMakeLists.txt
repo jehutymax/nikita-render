@@ -9,11 +9,11 @@ project(nikita_render)
 if (NOT APPLE)
     include_directories(
             ../3rd_party
-            3rd_party/openimageio/dist/linux64/include
-            3rd_party/tbb/tbb/include)
+            ../3rd_party/openimageio/dist/linux64/include
+            ../3rd_party/tbb/tbb/include)
 
     link_directories(
-            3rd_party/openimageio/dist/linux64/lib)
+            ../3rd_party/openimageio/dist/linux64/lib)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fpermissive")
 else (NOT APPLE) #i.e., it is Apple
