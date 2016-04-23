@@ -7,12 +7,22 @@
 
 #include <vector>
 #include "shape.h"
+#include "intersection.h"
+#include "light.h"
+#include "primitive.h"
+
 namespace nikita
 {
     class Scene
     {
     public:
-        std::vector<ShapePtr> objects;
+
+        bool intersect(Ray &ray, IntersectionPtr &is) const;
+
+        std::vector<GeoPrimPtr> objects;
+        std::vector<LightPtr> lights;
+        AmbientLightPtr ambientLight;
+        Color backgroundColor;
     };
 
 typedef std::shared_ptr<Scene> ScenePtr;

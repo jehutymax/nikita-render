@@ -52,9 +52,39 @@ set(SOURCE_FILES
         core/sensor.cpp
         core/sensor.h
         core/sampler.cpp
-        core/sampler.h core/transform.cpp util/cpuTimer.h)
+        core/sampler.h
+        core/transform.cpp
+        util/cpuTimer.h
+        core/color.cpp
+        core/color.h
+        core/light.cpp
+        core/light.h
+        core/bxdf.cpp
+        core/bxdf.h
+        core/intersection.cpp
+        core/intersection.h
+        core/primitive.cpp
+        core/primitive.h
+        core/surfaceShader.cpp
+        core/surfaceShader.h
+        core/material.cpp
+        core/material.h
+        )
 
-set(TEST_SOURCE_FILES test/main.cpp test/TestShapes.cpp test/TestReaders.cpp util/stringUtils.cpp util/stringUtils.h core/BoundingBox.cpp core/BoundingBox.h core/ray.cpp core/ray.h test/TestNumerical.cpp)
+set(TEST_SOURCE_FILES
+        test/main.cpp
+        test/TestShapes.cpp
+        test/TestReaders.cpp
+        util/stringUtils.cpp
+        util/stringUtils.h
+        core/BoundingBox.cpp
+        core/BoundingBox.h
+        core/ray.cpp
+        core/ray.h
+        test/TestNumerical.cpp
+        core/triangleMesh.cpp
+        core/color.cpp
+        test/TestColor.cpp)
 
 add_executable(nikita_render ${SOURCE_FILES})
 add_executable(nikita_render_tests ${TEST_SOURCE_FILES})

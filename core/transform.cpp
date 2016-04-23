@@ -98,7 +98,7 @@ const Transform nikita::Transform::getLookAt(const Point &pos, const Point &look
     t(2, 3) = pos(2);
 
     // +z axis is defined as the difference between the point we're looking at and the camera position.
-    Vector direction = (lookAt - pos).normalized();
+    Vector direction = (pos - lookAt).normalized();
     // Left vector, since this is a right-hand system.
     Vector left = (up.normalized().cross(direction)).normalized();
     // And we want to end up with an orthonormal basis, so we recompute the up vector.
@@ -117,9 +117,9 @@ const Transform nikita::Transform::getPerspective(float fieldOfView, float n, fl
     Matrix t = createMatrixInstance(false);
     t(0, 0) = 1.f;
     t(1, 1) = 1.f;
-    t(2, 2) = f / (f - n);
-    t(2, 3) = - f * n / (f - n);
-    t(3, 2) = 1.f;
+    t(2, 2) = -(f + n) / (f - n);
+    t(2, 3) = - (2 *f * n) / (f - n);
+    t(3, 2) = -1.f;
 
     // scale to canonical view volume
     float inverseTan = 1.f / tanf(MathUtils::toRadians(fieldOfView) / 2.0f);

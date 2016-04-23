@@ -25,7 +25,7 @@ public:
     BoundingBox objectBound() const; // implemented, not tested, not in use.
 
     bool isIntersectable();
-    bool intersect(const Ray &ray, float *t) const;
+    bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
 
 private:
     float radius;

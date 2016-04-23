@@ -1,70 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <nikita version="0.1">
-    <scene version="0.5.0">
+    <scene version="0.5.0" background="0.06,0.38,0.48">
+        <light type="point">
+            <float name="intensity" value="1.0"/>
+            <color value="0.98,0.64,0.01"/>
+            <transform name="LightToWorld">
+                <translate x="-3.5" y="-5" z="2"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.95"/>
+            <color value="0.98,0.97,0.96"/>
+        </light>
         <shape type="sphere">
-            <float name="radius" value="1.25"/>
+            <float name="radius" value="0.8"/>
             <float name="phi" value="360.0"/>
             <transform name="toWorld">
-                <translate x="2.5" y="2.5"/>
+                <translate x="-2" y="-3" z="-3"/>
             </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6000"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
         </shape>
         <shape type="sphere">
-            <float name="radius" value="1.25"/>
-            <float name="phi" value="270.0"/>
-            <transform name="toWorld">
-                <translate x="1.0" y="1.0"/>
-                <scale value="0.65"/>
-            </transform>
-        </shape>
-        <shape type="sphere">
-            <float name="radius" value="1.25"/>
-            <float name="phi" value="180.0"/>
-            <transform name="toWorld">
-                <translate x="-1.0" y="1.0"/>
-                <scale value="0.65"/>
-            </transform>
-        </shape>
-        <shape type="sphere">
-            <float name="radius" value="1.25"/>
-            <float name="phi" value="90.0"/>
-            <transform name="toWorld">
-                <translate x="-3.0" y="1.0"/>
-                <scale value="0.65"/>
-            </transform>
-        </shape>
-        <shape type="sphere">
-            <float name="radius" value="0.55"/>
+            <float name="radius" value="0.8"/>
             <float name="phi" value="360.0"/>
             <transform name="toWorld">
-                <translate x="2.0" y="-2.5"/>
-                <scale x="3.2"/>
+                <translate x="-2" y="-1" z="-3"/>
             </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="600"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
         </shape>
         <shape type="sphere">
-            <float name="radius" value="0.55"/>
-            <float name="phi" value="180.0"/>
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
             <transform name="toWorld">
-                <translate x="-2.0" y="-2.5"/>
-                <scale x="3.2"/>
+                <translate x="-2" y="1" z="-3"/>
             </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="60"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
         </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="-2" y="3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
+        </shape>
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="1.25"/>-->
+            <!--<float name="phi" value="270.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="1.0" y="1.0"/>-->
+                <!--<scale value="0.65"/>-->
+            <!--</transform>-->
+        <!--</shape>-->
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="0" y="-3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.22,0.55,0.56"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="0" y="-1" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.93,0.22,0.55"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="0" y="1" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.79,0.88,0.99"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="0" y="3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.3"/>
+                <float name="kd" value="0.65"/>
+                <float name="ks" value="0.2"/>
+                <float name="exp" value="6"/>
+                <color value="0.49,0.98,0.01"/>
+            </material>
+        </shape>
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="1.25"/>-->
+            <!--<float name="phi" value="180.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-1.0" y="1.0"/>-->
+                <!--<scale value="0.65"/>-->
+            <!--</transform>-->
+        <!--</shape>-->
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="-3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.98,0.98,0.98"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="-1" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.44,0.44,0.77"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="1" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.8"/>
+                <float name="ks" value="0.8"/>
+                <float name="exp" value="3"/>
+                <color value="0.01,0.90,0.02"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.98,0.01,0.01"/>
+            </material>
+        </shape>
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="1.25"/>-->
+            <!--<float name="phi" value="90.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-3.0" y="1.0"/>-->
+                <!--<scale value="0.65"/>-->
+            <!--</transform>-->
+        <!--</shape>-->
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.55"/>-->
+            <!--<float name="phi" value="360.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="2.0" y="-2.5"/>-->
+                <!--<scale x="3.2"/>-->
+            <!--</transform>-->
+        <!--</shape>-->
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.55"/>-->
+            <!--<float name="phi" value="180.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-2.0" y="-2.5"/>-->
+                <!--<scale x="3.2"/>-->
+            <!--</transform>-->
+        <!--</shape>-->
         <!-- Instantiate a perspective camera with 45 degrees field of view -->
         <sensor type="perspective">
-            <!-- Rotate the camera around the Y axis by 180 degrees -->
             <transform name="toWorld">
-                <lookat origin="0, 0, 15" target="0, 0, 0" up="0, 1, 0"/>
+                <lookat origin="0, 0, 6" target="0, 0, 0" up="0, 1, 0"/>
             </transform>
-            <float name="fov" value="30"/>
+            <float name="fov" value="60"/>
             <!-- Render with 1 sample per pixel using the
             simple renderer (bw) -->
             <sampler type="simple">
                 <integer name="sampleCount" value="1"/>
             </sampler>
-            <!-- Generate an EXR image at HD resolution -->
             <film type="png">
-                <integer name="width" value="640"/>
-                <integer name="height" value="640"/>
-                <string name="filename" value="partial_spheres.png"/>
+                <integer name="width" value="2048"/>
+                <integer name="height" value="2048"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/partial_spheres.png"/>
             </film>
         </sensor>
     </scene>

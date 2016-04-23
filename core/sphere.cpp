@@ -41,7 +41,7 @@ bool Sphere::isIntersectable()
     return true;
 }
 
-bool Sphere::intersect(const Ray &r, float *t) const
+bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
 {
     nikita::Ray ray;
     //transform incoming ray to object-space
@@ -92,6 +92,12 @@ bool Sphere::intersect(const Ray &r, float *t) const
     }
 
     *t = hit;
+
+    // fill Intersection object
+    ip->hit = true;
+    ip->hitPoint = r(hit);
+    ip->normal = (ray.origin + hit * ray.direction) / this->radius;
+
     return true;
 
 }

@@ -9,53 +9,40 @@ using nikita::SimpleRenderer;
 
 // SimpleRenderer
 SimpleRenderer::SimpleRenderer(CameraPtr camera)
-    : camera(camera)
+    : camera(camera),
+      sampler(std::make_shared<Sampler>(0, camera->film->resolutionX, 0, camera->film->resolutionY, /* spp */ 1)),
+      shader(std::make_shared<SimpleShader>())
 { }
 
-bool SimpleRenderer::runIntersectionTest(const Ray &r, const CameraSample &s, const ShapePtr shape)
-{
-    float t = 0;
-    bool hit = shape->intersect(r, &t);
-    if (hit)
-        camera->film->addSample(s, 250);
-    else
-        camera->film->addSample(s, 0);
-}
-
-void SimpleRenderer::render(const Scene &scene)
+void SimpleRenderer::render(const ScenePtr scene)
 {
     CpuTimer t("Shooting rays");
+    std::vector<Color> result(camera->film->resolutionX * camera->film->resolutionY);
+
     // get samples
-    for (int i = 0; i < camera->film->resolutionX; ++i)
+    Sample sample;
+    while(sampler->next(sample))
     {
-        for (int j = 0; j < camera->film->resolutionY; ++j)
+        CameraSample s(sample.imageX, sample.imageY);
+        int vectorIndex = sample.imageY + sample.imageX * camera->film->resolutionX;
+        IntersectionPtr ip = std::make_shared<Intersection>();
+        Ray ray;
+        camera->generateRay(s, &ray);
+
+        if (scene->intersect(ray, ip))
         {
-            CameraSample s;
-            s.imageX = i;
-            s.imageY = j;
-            Ray ray;
-            camera->generateRay(s, &ray);
+            // shade the object that was hit
+            // hit information is maintained in the Intersection object,
+            // returned by the intersect method of the geometry.
+            result[vectorIndex] = shader->Li(scene, ip, sample);
+        }
+        else
+        {
+            // deal with rays that didn't hit anything
+            result[vectorIndex] = scene->backgroundColor;
 
-            for (int k = 0; k < scene.objects.size(); k++)
-            {
-                Ray r = ray;
-                if (scene.objects[k]->isIntersectable())
-                {
-                    runIntersectionTest(r, s, scene.objects[k]);
-                }
-                else
-                {
-                    std::vector<ShapePtr> subshapes;
-                    scene.objects[k]->divide(subshapes);
-
-                    for (int l = 0; l < subshapes.size(); ++l) {
-                        runIntersectionTest(r, s, subshapes[l]);
-                    }
-
-                }
-            }
         }
     }
     t.stop();
-    camera->film->writeImage();
+    camera->film->writeImage(result);
 }

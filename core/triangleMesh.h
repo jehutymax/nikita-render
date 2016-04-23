@@ -26,8 +26,12 @@ namespace nikita
         int numberVertices;
         std::vector<Point*> vertexIdx;
         std::vector<Point> vertexPos;
-        //todo: later store normals
+        std::vector<Normal> normals;
+        std::vector<Normal*> normalIdx;
         std::vector<ShapePtr> triangles;
+
+    private:
+        static Normal calculateNormal(Point p0, Point p1, Point p2);
     };
 
     class Triangle : public Shape
@@ -37,11 +41,13 @@ namespace nikita
                     TriangleMesh* parent, int id);
 
         bool isIntersectable();
-        bool intersect(const Ray &ray, float *t) const;
+        bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
 
         inline const Point& getP1() const;
         inline const Point& getP2() const;
         inline const Point& getP3() const;
+        inline const Normal getTriangleNormal() const;
+        inline const Normal getInterpolatedNormal(float u, float v) const;
     private:
         TriangleMesh *mesh;
         int triangleNumber;

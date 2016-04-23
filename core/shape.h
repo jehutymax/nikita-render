@@ -8,6 +8,7 @@
 #include "nikita.h"
 #include "transform.h"
 #include "ray.h"
+#include "intersection.h"
 
 namespace nikita
 {
@@ -28,7 +29,7 @@ public:
         return false;
     }
 
-    virtual bool intersect(const Ray &ray, float *t) const
+    virtual bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const
     {
         return false;
     }

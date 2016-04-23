@@ -15,9 +15,18 @@
 
 typedef Eigen::Vector3f Point;
 typedef Eigen::Vector3f Vector;
+typedef Eigen::Vector3f Normal;
 typedef Eigen::Matrix4f Matrix;
+typedef Eigen::Array3f RGB;
 
 static constexpr float Infinity = std::numeric_limits<float>::infinity();
 static constexpr float Pi = 3.1415927;
+static constexpr float InvPi = 1.0f/Pi;
+
+namespace nikita
+{
+class Intersection;
+typedef std::shared_ptr<Intersection> IntersectionPtr;
+}
 
 #endif //NIKITA_RENDER_NIKITA_H

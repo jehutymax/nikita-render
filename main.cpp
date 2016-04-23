@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
     nikita::sceneParser parser;
     parser.loadFile(std::string(argv[1]));
-    nikita::Scene scene = *parser.getScene();
+    nikita::ScenePtr scene = parser.getScene();
 
     nikita::SimpleRenderer renderer(parser.getCamera());
 

@@ -7,6 +7,10 @@
 using nikita::sceneParser;
 sceneParser::SceneTagMap sceneParser::sceneTags;
 
+sceneParser::sceneParser()
+    : scene(std::make_shared<Scene>())
+{ }
+
 void nikita::sceneParser::loadFile(std::string filePath)
 {
     OIIO::pugi::xml_document doc;
@@ -15,7 +19,7 @@ void nikita::sceneParser::loadFile(std::string filePath)
 
     std::cout << "Reading file " << filePath << ": " << result.description() << std::endl;
 
-    this->scene = std::make_shared<Scene>();
+    setBackground(scene);
 
     for (OIIO::pugi::xml_node_iterator it = scene.begin(); it != scene.end(); ++it)
     {
@@ -32,10 +36,22 @@ void nikita::sceneParser::loadFile(std::string filePath)
             case SENSOR:
                 processSensor(*it);
                 break;
+            case LIGHT:
+                processLight(*it);
+                break;
             default:
                 break;
         }
     }
+}
+void sceneParser::setBackground(const Node &scene)
+{
+    Color background;
+    if (scene.attribute("background"))
+        background = getColor(scene.attribute("background"));
+    else
+        background = Color(0.86, 0.98, 0.98);
+    sceneParser::scene->backgroundColor = background;
 }
 
 void sceneParser::processShape(const OIIO::pugi::xml_node &node)
@@ -85,7 +101,7 @@ void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
         std::cout << "Width: " << w << "; Height: " << h << std::endl;
         std::cout << "Image to be written: " << filename << std::endl;
 
-        this->film = std::make_shared<BWFilm>(w, h, filename);
+        this->film = std::make_shared<RGBFilm>(w, h, filename);
     }
 
     // Sampler
@@ -95,6 +111,129 @@ void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
     float screenDimensions[4] = {-1.f, 1.f, -1.f, 1.f};
     this->camera = std::make_shared<PerspectiveCamera>(*t, screenDimensions, fieldOfView, this->film);
 
+}
+
+nikita::MaterialPtr sceneParser::processMaterial(const OIIO::pugi::xml_node &node)
+{
+    Node materialNode;
+    if (node.name() == "material")
+        materialNode = node;
+    else if (hasMaterial(node))
+        materialNode = node.child("material");
+    else
+    {
+        // make default
+        MattePtr matte = std::make_shared<Matte>();
+        matte->setKa(0.2);
+        matte->setKd(0.8);
+        matte->setCd(Color::green());
+        return MaterialPtr(matte);
+    }
+
+    switch(sceneTags.at(getType(materialNode))) {
+        case MATTE: {
+            float ka;
+            if (!getFloat(materialNode, "ka", &ka))
+                ka = 0;
+            float kd;
+            if (!getFloat(materialNode, "kd", &kd))
+                kd = 0;
+            Color cd = getColor(materialNode);
+            MattePtr matte = std::make_shared<Matte>();
+            matte->setKa(ka);
+            matte->setKd(kd);
+            matte->setCd(cd);
+            return MaterialPtr(matte);
+        }
+        case PHONG: {
+            float ka;
+            if (!getFloat(materialNode, "ka", &ka))
+                ka = 0;
+            float kd;
+            if (!getFloat(materialNode, "kd", &kd))
+                kd = 0;
+            float ks;
+            if (!getFloat(materialNode, "ks", &ks))
+                ks = 0;
+            float exp;
+            if (!getFloat(materialNode, "exp", &exp))
+                exp = 6;
+            Color cd = getColor(materialNode);
+            PhongPtr phong = std::make_shared<Phong>();
+            phong->setKa(ka);
+            phong->setKd(kd);
+            phong->setKs(ks);
+            phong->setExp(exp);
+            phong->setCd(cd);
+            return MaterialPtr(phong);
+        }
+        default:
+            std::cout << getType(node) << " not understood." << std::endl;
+            return nullptr;
+    }
+
+}
+
+void sceneParser::processLight(const Node &node)
+{
+    switch(sceneTags.at(getType(node)))
+    {
+        case POINT: {
+            Color c = getColor(node);
+            float intensity = (getFloat(node, "intensity", &intensity) ? intensity : 0.0f);
+            TransformPtr lightTransform = processTransform(node);
+            PointLightPtr pp = std::make_shared<PointLight>(lightTransform, 1);
+            pp->setIntensity(intensity);
+            pp->setColor(c);
+            this->scene->lights.push_back(LightPtr(pp));
+            break;
+        }
+        case AMBIENT: {
+            Color c = getColor(node);
+            float intensity = (getFloat(node, "intensity", &intensity) ? intensity : 0.0f);
+            TransformPtr lightTransform = processTransform(node);
+            AmbientLightPtr ap = std::make_shared<AmbientLight>(lightTransform, 1);
+            ap->setIntensity(intensity);
+            ap->setColor(c);
+            this->scene->ambientLight = ap;
+            break;
+        }
+        default:
+            std::cout << getType(node) << " not understood." << std::endl;
+            return;
+    }
+}
+
+nikita::Color sceneParser::getColor(const Node &node)
+{
+    Node colorNode;
+    if (node.name() == "color")
+        colorNode = node;
+    else if (hasColor(node))
+        colorNode = node.child("color");
+    else
+        return Color::black();
+
+    Attribute c = colorNode.attribute("value");
+    return getColor(c);
+
+}
+
+nikita::Color sceneParser::getColor(const Attribute &c)
+{
+    std::vector<std::string> colorTokens = StringUtils::tokenize(c.value(), ",");
+
+    if(colorTokens.size() == 3)
+    {
+        float r = std::stof(colorTokens[0]);
+        float g = std::stof(colorTokens[1]);
+        float b = std::stof(colorTokens[2]);
+        return Color(r,g,b);
+    }
+    else{
+        std::cout << "Color information couldn't be read. Falling back to Black." << std::endl;
+        return Color::black();
+    }
 }
 
 nikita::TransformPtr sceneParser::processTransform(const Node &node)
@@ -226,8 +365,23 @@ Transform sceneParser::processLookAt(const Node &node)
 
 bool sceneParser::hasTransform(const Node &parentNode)
 {
-    Node transf = parentNode.child("transform");
-    if (transf)
+    return hasChildByName(parentNode, "transform");
+}
+
+bool sceneParser::hasMaterial(const Node &parent)
+{
+    return hasChildByName(parent, "material");
+}
+
+bool sceneParser::hasColor(const Node &parent)
+{
+    return hasChildByName(parent, "color");
+}
+
+bool sceneParser::hasChildByName(const Node &parent, const std::string &name)
+{
+    Node n = parent.child(name.c_str());
+    if (n)
         return true;
     else
         return false;
@@ -254,7 +408,10 @@ void sceneParser::createSphere(const OIIO::pugi::xml_node &node)
     // Get a transform for the sphere
     TransformPtr pt = processTransform(node);
     TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
-    this->scene->objects.push_back(std::make_shared<Sphere>(pt, ptInv, radius, zmin, zmax, phi));
+    ShapePtr spherePtr = std::make_shared<Sphere>(pt, ptInv, radius, zmin, zmax, phi);
+    MaterialPtr materialPtr = processMaterial(node);
+
+    this->scene->objects.push_back(std::make_shared<GeoPrim>(spherePtr, materialPtr));
 }
 
 void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)
@@ -270,7 +427,9 @@ void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)
     int numTriangles = faces.size() / 3;
     TransformPtr pt = processTransform(node);
     TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
-    this->scene->objects.push_back(std::make_shared<TriangleMesh>(pt, ptInv, numTriangles, trianglePos.size(), trianglePos, faces));
+    ShapePtr trianglePtr = std::make_shared<TriangleMesh>(pt, ptInv, numTriangles, trianglePos.size(), trianglePos, faces);
+    MaterialPtr materialPtr = processMaterial(node);
+    this->scene->objects.push_back(std::make_shared<GeoPrim>(trianglePtr, materialPtr));
     std::cout << "SMF file was loaded with " << numTriangles << " triangles." << std::endl;
 }
 

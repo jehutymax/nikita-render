@@ -9,13 +9,14 @@
 #include "scene.h"
 #include "camera.h"
 #include "../util/cpuTimer.h"
+#include "surfaceShader.h"
 
 namespace nikita
 {
 class Renderer
 {
 public:
-    virtual void render(const Scene& scene) = 0;
+    virtual void render(const ScenePtr scene) = 0;
 //    virtual float incidentRadiance();
 //
 };
@@ -25,11 +26,11 @@ class SimpleRenderer : public Renderer
 {
 public:
     SimpleRenderer(CameraPtr camera);
-    void render(const Scene& scene);
+    virtual void render(const ScenePtr scene);
 private:
     CameraPtr camera;
-
-    bool runIntersectionTest(const Ray &r, const CameraSample &s, const ShapePtr shape);
+    SamplerPtr sampler;
+    ShaderPtr shader;
 };
 
 }

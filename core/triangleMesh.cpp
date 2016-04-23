@@ -17,18 +17,38 @@ TriangleMesh::TriangleMesh(const TransformPtr obj2World,
     numberTriangles = nTriangles;
     numberVertices = nVertices;
 
+    Normal n(0,0,0);
     for (int j = 0; j < numberVertices; j+=3)
     {
         Point p(positions[j], positions[j+1], positions[j+2]);
         Point pp = obj2World->applyP(p);
         vertexPos.push_back(pp);
+        normals.push_back(n);
     }
+
 
     for (int k = 0; k < faces.size(); ++k)
     {
         Point *pp = &vertexPos[faces[k]];
         vertexIdx.push_back(pp);
+        Normal *pn = &normals[faces[k]];
+        normalIdx.push_back(pn);
+
     }
+    std::cout << normals.size() << std::endl;
+    for (int i = 0; i < faces.size(); i+=3) {
+        Point p0 = *(vertexIdx[i]);
+        Point p1 = *(vertexIdx[i + 1]);
+        Point p2 = *(vertexIdx[i + 2]);
+
+        Normal n = calculateNormal(p0, p1, p2);
+        *normalIdx[i] += n;
+        *normalIdx[i + 1] += n;
+        *normalIdx[i + 2] += n;
+    }
+
+    for (int i = 0; i < normals.size(); ++i)
+        normals[i].normalize();
 }
 
 bool TriangleMesh::isIntersectable()
@@ -75,7 +95,7 @@ const Point& Triangle::getP3() const
     return *mesh->vertexIdx[3 * this->triangleNumber + 2];
 }
 
-bool Triangle::intersect(const Ray &ray, float *t) const
+bool Triangle::intersect(const Ray &ray, float *t, IntersectionPtr ip) const
 {
     // obtain the vertices for this triangle
     const Point &p1 = getP1();
@@ -109,5 +129,34 @@ bool Triangle::intersect(const Ray &ray, float *t) const
         return false;
 
     *t = hit;
+    ip->hit = true;
+    ip->hitPoint = ray(hit);
+    ip->normal = getInterpolatedNormal(b1, b2);
+
     return true;
+}
+
+Normal TriangleMesh::calculateNormal(Point p0, Point p1, Point p2)
+{
+    Vector a(p1 - p0);
+    Vector b(p2 - p0);
+    Normal n = a.cross(b);
+    return n.normalized();
+}
+
+const Normal Triangle::getTriangleNormal() const
+{
+    Normal n(0,0,0);
+    n += mesh->normals[3 * this->triangleNumber];
+    n += mesh->normals[3 * this->triangleNumber + 1];
+    n += mesh->normals[3 * this->triangleNumber + 2];
+    return -(n.normalized());
+}
+
+const Normal Triangle::getInterpolatedNormal(float u, float v) const
+{
+    Normal n((1.0f - u - v) * *mesh->normalIdx[3 * this->triangleNumber]
+                 + u * *mesh->normalIdx[3 * this->triangleNumber + 1]
+                 + v * *mesh->normalIdx[3 * this->triangleNumber + 2]);
+    return (n.normalized());
 }

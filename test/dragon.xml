@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0">
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.8"/>-->
+            <!--<float name="phi" value="360.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-2" y="-3" z="-3"/>-->
+            <!--</transform>-->
+            <!--<material type="phong">-->
+                <!--<float name="ka" value="0.2"/>-->
+                <!--<float name="kd" value="0.6"/>-->
+                <!--<float name="ks" value="0.25"/>-->
+                <!--<float name="exp" value="6"/>-->
+                <!--<color value="0.98,0.98,0.98"/>-->
+            <!--</material>-->
+        <!--</shape>-->
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.8"/>-->
+            <!--<float name="phi" value="360.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-2" y="-1" z="-3"/>-->
+            <!--</transform>-->
+            <!--<material type="phong">-->
+                <!--<float name="ka" value="0.2"/>-->
+                <!--<float name="kd" value="0.6"/>-->
+                <!--<float name="ks" value="0.25"/>-->
+                <!--<float name="exp" value="6"/>-->
+                <!--<color value="0.44,0.44,0.77"/>-->
+            <!--</material>-->
+        <!--</shape>-->
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.8"/>-->
+            <!--<float name="phi" value="360.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-2" y="1" z="-3"/>-->
+            <!--</transform>-->
+            <!--<material type="phong">-->
+                <!--<float name="ka" value="0.2"/>-->
+                <!--<float name="kd" value="0.8"/>-->
+                <!--<float name="ks" value="0.8"/>-->
+                <!--<float name="exp" value="3"/>-->
+                <!--<color value="0.01,0.90,0.02"/>-->
+            <!--</material>-->
+        <!--</shape>-->
+        <!--<shape type="sphere">-->
+            <!--<float name="radius" value="0.8"/>-->
+            <!--<float name="phi" value="360.0"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<translate x="-2" y="3" z="-3"/>-->
+            <!--</transform>-->
+            <!--<material type="phong">-->
+                <!--<float name="ka" value="0.2"/>-->
+                <!--<float name="kd" value="0.6"/>-->
+                <!--<float name="ks" value="0.25"/>-->
+                <!--<float name="exp" value="6"/>-->
+                <!--<color value="0.98,0.01,0.01"/>-->
+            <!--</material>-->
+        <!--</shape>-->
+        <!--<shape type="smf">-->
+            <!--<string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_small.smf"/>-->
+            <!--<transform name="toWorld">-->
+                <!--&lt;!&ndash;<rotate z="1" angle="90"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<rotate y="1" angle="180"/>&ndash;&gt;-->
+                <!--<scale value="1.0"/>-->
+            <!--</transform>-->
+            <!--<material type="phong">-->
+                <!--<float name="ka" value="0.2"/>-->
+                <!--<float name="kd" value="0.7"/>-->
+                <!--<float name="ks" value="0.25"/>-->
+                <!--<color value="0.98,0.84,0.01"/>-->
+            <!--</material>-->
+        <!--</shape>-->
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/dragon.smf"/>
+            <transform name="toWorld">
+                <scale value="2.0"/>
+                <translate x="0" y="0" z="0"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.7"/>
+                <float name="ks" value="0.25"/>
+                <color value="0.98,0.84,0.01"/>
+            </material>
+        </shape>
+        <!-- Instantiate a perspective camera with 45 degrees field of view -->
+        <light type="point">
+            <float name="intensity" value="1.0"/>
+            <color value="0.98,0.99,0.99"/>
+            <transform name="LightToWorld">
+                <translate x="2" y="0" z="3"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.97"/>
+            <color value="0.99,0.99,0.99"/>
+        </light>
+        <sensor type="perspective">
+            <!-- Rotate the camera around the Y axis by 180 degrees -->
+            <transform name="toWorld">
+                <lookat origin="0, 0, 5" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+            <!-- Render with 1 sample per pixel using the
+            simple renderer (bw) -->
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <!-- Generate an EXR image at HD resolution -->
+            <film type="png">
+                <integer name="width" value="512"/>
+                <integer name="height" value="512"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/dragon.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>
