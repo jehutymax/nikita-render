@@ -33,6 +33,73 @@
 
 <p>This page holds the results produced with the first iteration of a simple ray tracer developed for a graduate course on Rendering at Drexel University.</p>
 
+
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Assignment #2 - Phong Shading</h3>
+
+<h4>Simple images</h4>
+<table>
+  <tr>
+     <td>
+<p> Simple Sphere <br>
+<a href="images/ps0.png">
+<img src="images/ps0.png" width=120 height=120/>
+</a>
+</p>
+</td>
+ <td>
+<p>Rotated bunnies and spheres<br>
+<a href="images/spheres_bunnies0.png">
+<img src="images/spheres_bunnies0.png" width=120 height=120/>
+</a>
+</p>
+</td>
+</tr>
+</table>
+
+<h4>More interesting examples</h4>
+<p> All the images below were first rendered at 1024x1024, and then averaged down to 512x512.
+
+<p><strong>Series of spheres</strong><br>
+<p> In the first row, all orange spheres have the same material but different specular exponents. 
+They are, from left to right, 6, 60, 600 and 6000. <br>
+The other spheres only vary in color. <br>
+One point light and one ambient light. <br>
+All the specs of each material and lights are in the scene description file <a href="images/spheres_series.xml"> here. </a> <br><strong>Please note:</strong> The path to the SMF files has to be correct in the scene description file. For most examples, the path will have to be changed. </p>
+<p><strong>Rendering Time:</strong> 212s on MacBook Pro (2.7 GHz Intel Core i7), 386s on Tux.
+<a href="images/spheres_series.png">
+<center>
+<img src="images/spheres_series.png" width=300 height=300 align="middle"/> </center>
+</a>
+</p>
+
+<p><strong>Lost bunnies amid spheres</strong><br>
+<p> One ambient light and two point lights.<br> Background is set to gray. <br>
+One point light and one ambient light. <br>
+Materials vary by object. 
+Again, all the specs of each material and lights are in the scene description file <a href="images/spheres_with_bunnies.xml"> here. </a> <br><strong>Please note:</strong> The path to the SMF files has to be correct in the scene description file. For most examples, the path will have to be changed. </p>
+<p><strong>Rendering Time:</strong> 795s on MacBook Pro (2.7 GHz Intel Core i7).
+<a href="images/spheres_bunnies.png">
+<center>
+<img src="images/spheres_bunnies.png" width=300 height=300 align="middle"/> </center>
+</a>
+</p>
+
+<p><strong>Orderly bunnies and spheres</strong><br>
+The other models were taking too long to render, so I kept using the bunny mesh. In this image, the bunny model as 1k faces. In the previous examples, the low-res with 200 faces was used instead.
+<p> One ambient light and one point light.<br> Background is set to light blue, which is the application default. <br>
+One point light and one ambient light. <br>
+Materials vary by object. 
+Again, all the specs of each material and lights are in the scene description file <a href="images/nikita_scene_phong.xml"> here. </a> <br><strong>Please note:</strong> The path to the SMF files has to be correct in the scene description file. For most examples, the path will have to be changed. </p>
+<p><strong>Rendering Time:</strong> 3820s (1h03) on MacBook Pro (2.7 GHz Intel Core i7).
+<a href="images/big_bunny_test_scene.png">
+<center>
+<img src="images/big_bunny_test_scene.png" width=300 height=300 align="middle"/> </center>
+</a>
+</p>
+<hr>
+<hr>
+
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Assignment #1</h3>
 
