@@ -118,7 +118,7 @@ const Transform nikita::Transform::getPerspective(float fieldOfView, float n, fl
     t(0, 0) = 1.f;
     t(1, 1) = 1.f;
     t(2, 2) = -(f + n) / (f - n);
-    t(2, 3) = - (2 *f * n) / (f - n);
+    t(2, 3) = - (f * n) / (f - n);
     t(3, 2) = -1.f;
 
     // scale to canonical view volume
@@ -132,6 +132,30 @@ Transform nikita::Transform::operator*(const Transform &t) const
     Matrix prod = this->transformation * t.transformation;
     Matrix invProd = t.inverseTransformation * this->inverseTransformation;
     return Transform(prod, invProd);
+}
+
+nikita::BoundingBox Transform::operator()(const BoundingBox &bbox) const
+{
+    Point min;
+    Point max;
+
+    HPoint xMin = this->transformation.col(0) * bbox.pMin(0);
+    HPoint xMax = this->transformation.col(0) * bbox.pMax(0);
+
+    HPoint yMin = this->transformation.col(1) * bbox.pMin(1);
+    HPoint yMax = this->transformation.col(1) * bbox.pMax(1);
+
+    HPoint zMin = this->transformation.col(2) * bbox.pMin(2);
+    HPoint zMax = this->transformation.col(2) * bbox.pMax(2);
+
+    for (int i = 0; i < 3; ++i) {
+        min(i) = std::min(xMin(i), xMax(i)) + std::min(yMin(i), yMax(i)) + std::min(zMin(i), zMax(i))
+            + this->transformation(i, 3);
+        max(i) = std::max(xMin(i), xMax(i)) + std::max(yMin(i), yMax(i)) + std::max(zMin(i), zMax(i))
+            + this->transformation(i, 3);
+    }
+
+    return BoundingBox(min, max);
 }
 
 bool nikita::Transform::affectsHandedness()

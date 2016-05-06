@@ -21,6 +21,8 @@ namespace nikita
 
         bool isIntersectable();
         bool divide(std::vector<ShapePtr> &divided);
+        virtual BoundingBox objectBound() const;
+        virtual BoundingBox worldBound() const;
 
         int numberTriangles;
         int numberVertices;
@@ -32,6 +34,9 @@ namespace nikita
 
     private:
         static Normal calculateNormal(Point p0, Point p1, Point p2);
+        void computeBoundingBox();
+        BBoxPtr worldBBox;
+        BBoxPtr objBBox;
     };
 
     class Triangle : public Shape
@@ -42,6 +47,9 @@ namespace nikita
 
         bool isIntersectable();
         bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
+        virtual BoundingBox objectBound() const;
+        virtual BoundingBox worldBound() const;
+
 
         inline const Point& getP1() const;
         inline const Point& getP2() const;

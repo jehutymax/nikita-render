@@ -3,12 +3,15 @@
 //
 
 #include "sceneParser.h"
+#include "../core/accelerator/bvh.h"
 
 using nikita::sceneParser;
 sceneParser::SceneTagMap sceneParser::sceneTags;
 
 sceneParser::sceneParser()
-    : scene(std::make_shared<Scene>())
+    : scene(std::make_shared<Scene>()),
+      useAccelerator(false),
+      acceleratorSize(0)
 { }
 
 void nikita::sceneParser::loadFile(std::string filePath)
@@ -33,6 +36,9 @@ void nikita::sceneParser::loadFile(std::string filePath)
             case SHAPE:
                 processShape(*it);
                 break;
+            case ACCELERATOR:
+                processAccelerator(*it);
+                break;
             case SENSOR:
                 processSensor(*it);
                 break;
@@ -43,7 +49,27 @@ void nikita::sceneParser::loadFile(std::string filePath)
                 break;
         }
     }
+
+    // place the objects in the appropriate primitive construct
+    if (useAccelerator)
+    {
+        this->scene->primitive = std::make_shared<BVH>(this->objects, acceleratorSize);
+    }
+    else
+    {
+        this->scene->primitive = std::make_shared<NonAcceleratedCollection>(this->objects);
+    }
 }
+
+bool sceneParser::useAcceleration(const Node &scene)
+{
+    bool useAcceleration = false;
+    if (scene.attribute("accelerator"))
+        useAcceleration = (bool)std::stoi(scene.attribute("accelerator").value());
+
+    return useAcceleration;
+}
+
 void sceneParser::setBackground(const Node &scene)
 {
     Color background;
@@ -72,6 +98,20 @@ void sceneParser::processShape(const OIIO::pugi::xml_node &node)
             return;
     }
 
+}
+
+void sceneParser::processAccelerator(const Node &node)
+{
+    std::string accelType = getType(node);
+    // currently, type is ignored, and we use bvh
+    int leafSize;
+
+    if (node.attribute("leafSize"))
+        leafSize = std::stoi(node.attribute("leafSize").value());
+    else leafSize = 128;
+
+    useAccelerator = true;
+    acceleratorSize = leafSize;
 }
 
 void sceneParser::processSensor(const OIIO::pugi::xml_node &node)
@@ -411,7 +451,7 @@ void sceneParser::createSphere(const OIIO::pugi::xml_node &node)
     ShapePtr spherePtr = std::make_shared<Sphere>(pt, ptInv, radius, zmin, zmax, phi);
     MaterialPtr materialPtr = processMaterial(node);
 
-    this->scene->objects.push_back(std::make_shared<GeoPrim>(spherePtr, materialPtr));
+    objects.push_back(std::make_shared<GeoPrim>(spherePtr, materialPtr));
 }
 
 void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)
@@ -429,7 +469,7 @@ void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)
     TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
     ShapePtr trianglePtr = std::make_shared<TriangleMesh>(pt, ptInv, numTriangles, trianglePos.size(), trianglePos, faces);
     MaterialPtr materialPtr = processMaterial(node);
-    this->scene->objects.push_back(std::make_shared<GeoPrim>(trianglePtr, materialPtr));
+    objects.push_back(std::make_shared<GeoPrim>(trianglePtr, materialPtr));
     std::cout << "SMF file was loaded with " << numTriangles << " triangles." << std::endl;
 }
 

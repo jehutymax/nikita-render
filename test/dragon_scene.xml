@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.7.0">
+        <accelerator type="bvh" leafSize="1"/>
+        <shape type="smf">
+            <!--<string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_69k.smf"/>-->
+            <!--<string name="filename" value="/Users/rafael/Projects/nikita-render/test/teapot.smf"/>-->
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bigDragon.smf"/>
+            <transform name="toWorld">
+                <rotate y="1" angle="80"/>
+                <scale value="8.0"/>
+                <translate y="-0.2"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.5"/>
+                <float name="ks" value="0.40"/>
+                <color value="0.96,0.75,0.79"/>
+            </material>
+        </shape>
+        <light type="point">
+            <float name="intensity" value="1.0"/>
+            <color value="0.98,0.99,0.99"/>
+            <transform name="LightToWorld">
+                <translate x="2" y="0" z="3"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.97"/>
+            <color value="0.99,0.99,0.99"/>
+        </light>
+        <sensor type="perspective">
+            <transform name="toWorld">
+                <lookat origin="0, 5, 10" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <film type="png">
+                <integer name="width" value="1024"/>
+                <integer name="height" value="1024"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bigDragon.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>

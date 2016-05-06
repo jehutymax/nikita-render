@@ -24,7 +24,8 @@ void SimpleRenderer::render(const ScenePtr scene)
     while(sampler->next(sample))
     {
         CameraSample s(sample.imageX, sample.imageY);
-        int vectorIndex = sample.imageY + sample.imageX * camera->film->resolutionX;
+//        int vectorIndex = sampler->getFlatImageCoordinate();
+        int vectorIndex = sample.imageY * camera->film->resolutionX + sample.imageX;
         IntersectionPtr ip = std::make_shared<Intersection>();
         Ray ray;
         camera->generateRay(s, &ray);

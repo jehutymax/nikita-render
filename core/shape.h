@@ -9,6 +9,7 @@
 #include "transform.h"
 #include "ray.h"
 #include "intersection.h"
+#include "accelerator/BoundingBox.h"
 
 namespace nikita
 {
@@ -29,9 +30,18 @@ public:
         return false;
     }
 
+    virtual bool fullyDivide(std::vector<std::shared_ptr<Shape>> &divided) {return false;}
+
     virtual bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const
     {
         return false;
+    }
+
+    virtual BoundingBox objectBound() const = 0;
+
+    virtual BoundingBox worldBound() const
+    {
+        return (*objectToWorld)(objectBound());
     }
 
     const TransformPtr objectToWorld, worldToObject;

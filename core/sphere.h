@@ -9,7 +9,7 @@
 
 #include "nikita.h"
 #include "shape.h"
-#include "BoundingBox.h"
+#include "accelerator/BoundingBox.h"
 #include "../util/mathUtils.h"
 
 namespace nikita

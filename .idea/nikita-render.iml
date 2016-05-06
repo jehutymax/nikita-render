@@ -19,14 +19,16 @@
       <sourceFolder url="file://$MODULE_DIR$/util/stringUtils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/ray.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sampler.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/BoundingBox.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/intersection.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/light.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/material.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/renderer.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/sensor.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/BoundingBox.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/transform.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/sensor.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/material.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/accelerator/BoundingBox.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/accelerator/BoundingBox.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/accelerator/bvh.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/accelerator/bvh.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/surfaceShader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shape.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/bxdf.h" isTestSource="false" />
@@ -41,7 +43,6 @@
       <sourceFolder url="file://$MODULE_DIR$/core/color.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/triangleMesh.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sensor.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/intersection.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/nikita.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/camera.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/bxdf.cpp" isTestSource="false" />
@@ -49,6 +50,7 @@
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sampler.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/scene.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/transform.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/surfaceShader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/triangleMesh.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/ray.cpp" isTestSource="false" />

@@ -26,7 +26,6 @@ TriangleMesh::TriangleMesh(const TransformPtr obj2World,
         normals.push_back(n);
     }
 
-
     for (int k = 0; k < faces.size(); ++k)
     {
         Point *pp = &vertexPos[faces[k]];
@@ -35,7 +34,7 @@ TriangleMesh::TriangleMesh(const TransformPtr obj2World,
         normalIdx.push_back(pn);
 
     }
-    std::cout << normals.size() << std::endl;
+
     for (int i = 0; i < faces.size(); i+=3) {
         Point p0 = *(vertexIdx[i]);
         Point p1 = *(vertexIdx[i + 1]);
@@ -49,6 +48,8 @@ TriangleMesh::TriangleMesh(const TransformPtr obj2World,
 
     for (int i = 0; i < normals.size(); ++i)
         normals[i].normalize();
+
+    computeBoundingBox();
 }
 
 bool TriangleMesh::isIntersectable()
@@ -67,7 +68,28 @@ bool TriangleMesh::divide(std::vector<ShapePtr> &divided)
     return true;
 }
 
-// Triangle class methods
+nikita::BoundingBox TriangleMesh::objectBound() const
+{
+    return *objBBox;
+}
+
+nikita::BoundingBox TriangleMesh::worldBound() const
+{
+    return *worldBBox;
+}
+
+void TriangleMesh::computeBoundingBox()
+{
+    worldBBox = std::make_shared<BoundingBox>(vertexPos[0], vertexPos[0]);
+    Point p = (*worldToObject).applyP(vertexPos[0]);
+    objBBox = std::make_shared<BoundingBox>(p, p);
+    for (int i = 1; i < vertexPos.size(); ++i) {
+        *worldBBox = worldBBox->expand(vertexPos[i]);
+        *objBBox = objBBox->expand((*worldToObject).applyP(vertexPos[i]));
+    }
+}
+
+////////////////// Triangle class methods
 Triangle::Triangle(const TransformPtr obj2world, const TransformPtr world2obj, TriangleMesh *parent, int id)
     : Shape(obj2world, world2obj)
 {
@@ -93,6 +115,18 @@ const Point& Triangle::getP2() const
 const Point& Triangle::getP3() const
 {
     return *mesh->vertexIdx[3 * this->triangleNumber + 2];
+}
+
+nikita::BoundingBox Triangle::worldBound() const
+{
+    BoundingBox b(getP1(), getP2());
+    return b.expand(getP3());
+}
+
+nikita::BoundingBox Triangle::objectBound() const
+{
+    BoundingBox b((*worldToObject).applyP(getP1()), (*worldToObject).applyP(getP2()));
+    return b.expand((*worldToObject).applyP(getP3()));
 }
 
 bool Triangle::intersect(const Ray &ray, float *t, IntersectionPtr ip) const
@@ -128,11 +162,12 @@ bool Triangle::intersect(const Ray &ray, float *t, IntersectionPtr ip) const
     if (hit < ray.tMin || hit > ray.tMax)
         return false;
 
-    *t = hit;
-    ip->hit = true;
-    ip->hitPoint = ray(hit);
-    ip->normal = getInterpolatedNormal(b1, b2);
-
+    if (*t == 0 || hit < *t) {
+        *t = hit;
+        ip->hit = true;
+        ip->hitPoint = ray(hit);
+        ip->normal = getInterpolatedNormal(b1, b2);
+    }
     return true;
 }
 
@@ -160,3 +195,4 @@ const Normal Triangle::getInterpolatedNormal(float u, float v) const
                  + v * *mesh->normalIdx[3 * this->triangleNumber + 2]);
     return (n.normalized());
 }
+

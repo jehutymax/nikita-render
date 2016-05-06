@@ -19,7 +19,8 @@ namespace nikita
 
         bool intersect(Ray &ray, IntersectionPtr &is) const;
 
-        std::vector<GeoPrimPtr> objects;
+//        std::vector<GeoPrimPtr> objects;
+        PrimPtr primitive;
         std::vector<LightPtr> lights;
         AmbientLightPtr ambientLight;
         Color backgroundColor;

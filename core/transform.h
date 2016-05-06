@@ -10,6 +10,7 @@
 #include "../util/mathUtils.h"
 #include "eigen3/Eigen/Geometry" // for cross-product!
 #include "eigen3/Eigen/LU" // for determinant.
+#include "accelerator/BoundingBox.h"
 
 namespace nikita
 {
@@ -41,6 +42,7 @@ namespace nikita
         inline Point applyP(const Point &p) const;
         inline Vector applyV (const Vector& v) const;
         inline Ray operator()(const Ray &ray) const;
+        BoundingBox operator()(const BoundingBox &bbox) const;
 
         Transform operator*(const Transform& t) const;
 

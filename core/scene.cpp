@@ -8,11 +8,7 @@ using nikita::Scene;
 
 bool Scene::intersect(Ray &ray, IntersectionPtr &is) const
 {
-    bool hit = false;
-    for (int k = 0; k < objects.size(); k++)
-        hit |=  objects[k]->intersect(ray, is);
-
-    return hit;
+    return primitive->intersect(ray, is);
 }
 
 

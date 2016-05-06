@@ -32,19 +32,24 @@ namespace nikita {
         CameraPtr getCamera();
 
     private:
+        bool useAccelerator;
+        int acceleratorSize;
         ScenePtr scene;
         CameraPtr camera;
         SensorPtr film;
         SamplerPtr sampler;
+        std::vector<GeoPrimPtr> objects;
         void processShape(const OIIO::pugi::xml_node &node);
         void processSensor(const OIIO::pugi::xml_node &node);
         MaterialPtr processMaterial(const OIIO::pugi::xml_node &node);
         void processLight(const Node &node);
+        void processAccelerator(const Node &node);
         TransformPtr processTransform(const Node &node);
         Transform processRotate(const Node &node);
         Transform processTranslate(const Node &node);
         Transform processScale(const Node &node);
         Transform processLookAt(const Node &node);
+        bool useAcceleration(const Node &scene);
         bool hasTransform(const Node& parentNode);
         bool hasMaterial(const Node& parentNode);
         bool hasColor(const Node& parentNode);
@@ -61,7 +66,7 @@ namespace nikita {
 
         enum SceneTag {
             NIKITA, SCENE, SHAPE, SPHERE, SMF, OBJ, SENSOR, MATERIAL, SAMPLER, FILM, INTEGER, FLOAT, BOOLEAN, TRANSLATE, ROTATE, LOOKAT,
-            SCALE, POINT, VECTOR, TRANSFORM, MATTE, PHONG, LIGHT, AMBIENT, DEFAULT,
+            SCALE, POINT, VECTOR, TRANSFORM, MATTE, PHONG, LIGHT, AMBIENT, ACCELERATOR, DEFAULT,
         };
 
         struct SceneTagMap : public std::map<std::string, SceneTag>
@@ -92,6 +97,7 @@ namespace nikita {
                 this->operator[]("phong") = PHONG;
                 this->operator[]("light") = LIGHT;
                 this->operator[]("ambient") = AMBIENT;
+                this->operator[]("accelerator") = ACCELERATOR;
                 this->operator[]("default") = DEFAULT;
 
             };

@@ -35,8 +35,8 @@ set(SOURCE_FILES
         util/smfReader.h
         util/stringUtils.cpp
         util/stringUtils.h
-        core/BoundingBox.cpp
-        core/BoundingBox.h
+        core/accelerator/BoundingBox.cpp
+        core/accelerator/BoundingBox.h
         util/mathUtils.h
         core/sphere.cpp
         core/sphere.h
@@ -69,7 +69,7 @@ set(SOURCE_FILES
         core/surfaceShader.h
         core/material.cpp
         core/material.h
-        )
+        core/accelerator/bvh.cpp core/accelerator/bvh.h)
 
 set(TEST_SOURCE_FILES
         test/main.cpp
@@ -77,8 +77,8 @@ set(TEST_SOURCE_FILES
         test/TestReaders.cpp
         util/stringUtils.cpp
         util/stringUtils.h
-        core/BoundingBox.cpp
-        core/BoundingBox.h
+        core/accelerator/BoundingBox.cpp
+        core/accelerator/BoundingBox.h
         core/ray.cpp
         core/ray.h
         test/TestNumerical.cpp
