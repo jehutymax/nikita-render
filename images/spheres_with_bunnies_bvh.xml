@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0" background="0.2,0.2,0.2">
+        <!--<accelerator type="bvh" leafSize="1"/>-->
+        <light type="point">
+            <float name="intensity" value="0.94"/>
+            <color value="0.98,0.64,0.01"/>
+            <transform name="LightToWorld">
+                <translate x="-3.5" y="-5" z="-2"/>
+            </transform>
+        </light>
+        <light type="point">
+            <float name="intensity" value="0.86"/>
+            <color value="0.98,0.28,0.01"/>
+            <transform name="LightToWorld">
+                <translate x="1.6" y="5" z="-5"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.95"/>
+            <color value="0.98,0.97,0.96"/>
+        </light>
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="-2" y="-1" z="-3"/>
+                <!-- <translate x="-2" y="-1" z="-3"/> -->
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="4.5"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
+        </shape>
+         <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <translate x="0" y="-1" z="-3"/>
+                <rotate y="1" angle="180"/>
+                <rotate z="1" angle="-30"/>
+                <scale value="2"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="6"/>
+                <color value="0.93,0.22,0.55"/>
+            </material>
+        </shape>
+         <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <rotate z="1" angle="45"/>
+                <rotate x="1" angle="180"/>
+                <rotate z="1" angle="-45"/>
+                <translate x="0" y="2" z="0"/>
+                <scale value="1.5"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.3"/>
+                <float name="kd" value="0.8"/>
+                <float name="ks" value="0.45"/>
+                <float name="exp" value="4"/>
+                <color value="0.79,0.88,0.99"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="0.6"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="2" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="2"/>
+                <color value="0.44,0.44,0.77"/>
+            </material>
+        </shape>
+         <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="3.8" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.4"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.8"/>
+                <float name="exp" value="9"/>
+                <color value="0.01,0.90,0.02"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="-1" y="3" z="-3"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="8"/>
+                <color value="0.98,0.01,0.01"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/teapot.smf"/>
+            <transform name="toWorld">
+                <rotate y="1" angle="120"/>
+                <scale value="0.7"/>
+                <translate x="-10" y="-8"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.23125"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.773911"/>
+                <float name="exp" value="89.6"/>
+                <color value="0.99,0.65,0.01"/>
+            </material>
+        </shape>
+        <sensor type="perspective">
+            <transform name="toWorld">
+                <lookat origin="0, 0, -12" target="0, 0.5, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <film type="png">
+                <integer name="width" value="1080"/>
+                <integer name="height" value="1080"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/spheres_bunnies_NO_bvh.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>
