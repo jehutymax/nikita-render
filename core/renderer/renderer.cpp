@@ -66,37 +66,39 @@ void SuperSamplerRenderer::render(const ScenePtr scene)
 
     // get samples
     Sample sample;
-    int min = 999;
-    int max = 0;
-    int count = 0;
-    int acc = 0;
-    std::vector<int> cc(20);
+
+    // Commented-out sections below refer to the rendering of the ray heatmap for adaptive supersampling.
+//    int min = 999;
+//    int max = 0;
+//    int count = 0;
+//    int acc = 0;
+//    std::vector<int> cc(20);
     while(sampler->next(sample))
     {
         int vectorIndex = sample.imageY * camera->film->resolutionX + sample.imageX;
-//        result[vectorIndex] = processSquare(
-//            ImageCoord(sample.imageX-0.5, sample.imageY+0.5),
-//            ImageCoord(sample.imageX+0.5, sample.imageY+0.5),
-//            ImageCoord(sample.imageX+0.5, sample.imageY-0.5),
-//            ImageCoord(sample.imageX-0.5, sample.imageY-0.5)
-//        );
-        int sampleCount = processSquareNoShading(
+        result[vectorIndex] = processSquare(
             ImageCoord(sample.imageX-0.5, sample.imageY+0.5),
             ImageCoord(sample.imageX+0.5, sample.imageY+0.5),
             ImageCoord(sample.imageX+0.5, sample.imageY-0.5),
             ImageCoord(sample.imageX-0.5, sample.imageY-0.5)
         );
-        result[vectorIndex] = sampleCount * Color(0.25f, 0.25f, 0.25f);
-        min = std::min(min, sampleCount);
-        max = std::max(max, sampleCount);
-        count++;
-        acc += sampleCount;
-        cc[sampleCount]++;
-    }
-    std::cout << "min: " << min << ", max: " << max << std::endl;
-    std::cout << "avg: " << (float)acc/count << ", count: " << count << std::endl;
-    for (int i = 0; i < cc.size(); ++i) {
-        std::cout << i << ": " << cc[i] << std::endl;
+//        int sampleCount = processSquareNoShading(
+//            ImageCoord(sample.imageX-0.5, sample.imageY+0.5),
+//            ImageCoord(sample.imageX+0.5, sample.imageY+0.5),
+//            ImageCoord(sample.imageX+0.5, sample.imageY-0.5),
+//            ImageCoord(sample.imageX-0.5, sample.imageY-0.5)
+//        );
+//        result[vectorIndex] = sampleCount * Color(0.25f, 0.25f, 0.25f);
+//        min = std::min(min, sampleCount);
+//        max = std::max(max, sampleCount);
+//        count++;
+//        acc += sampleCount;
+//        cc[sampleCount]++;
+//    }
+//    std::cout << "min: " << min << ", max: " << max << std::endl;
+//    std::cout << "avg: " << (float)acc/count << ", count: " << count << std::endl;
+//    for (int i = 0; i < cc.size(); ++i) {
+//        std::cout << i << ": " << cc[i] << std::endl;
     }
     t.stop();
     camera->film->writeImage(result);
