@@ -21,7 +21,7 @@
       <sourceFolder url="file://$MODULE_DIR$/core/sampler.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/intersection.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/light.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/renderer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/renderer/renderer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sensor.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/material.h" isTestSource="false" />
@@ -46,7 +46,7 @@
       <sourceFolder url="file://$MODULE_DIR$/core/nikita.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/camera.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/bxdf.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/renderer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/renderer/renderer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sampler.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/scene.cpp" isTestSource="false" />

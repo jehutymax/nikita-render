@@ -23,6 +23,7 @@ public:
     virtual void getImageExtent(int *startX, int *endX, int *startY, int *endY) const {};
     virtual void writeImage(){};
     virtual void writeImage(const std::vector<Color> &samples) {}
+    virtual void writeAveragedImage(const std::vector<Color> &samples) {}
 
     const int resolutionX;
     const int resolutionY;
@@ -51,6 +52,7 @@ public:
     virtual void addSample(const CameraSample& sample, const Color &color);
     virtual void getImageExtent(int *startX, int *endX, int *startY, int *endY) const;
     virtual void writeImage(const std::vector<Color> &samples);
+    virtual void writeAveragedImage(const std::vector<Color> &samples);
 
 private:
     std::string file;

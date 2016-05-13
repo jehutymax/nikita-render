@@ -45,8 +45,8 @@ set(SOURCE_FILES
         numerical/quadratic.h
         core/scene.cpp
         core/scene.h
-        core/renderer.cpp
-        core/renderer.h
+        core/renderer/renderer.cpp
+        core/renderer/renderer.h
         core/camera.cpp
         core/camera.h
         core/sensor.cpp

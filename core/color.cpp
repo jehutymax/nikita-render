@@ -33,6 +33,11 @@ Color::Color(const Color &color)
     set(color.rgb);
 }
 
+Color Color::operator-(const Color &other) const
+{
+    return Color(this->rgb - other.rgb);
+}
+
 Color Color::operator+(const Color &other) const
 {
     return Color(this->rgb + other.rgb);
@@ -75,6 +80,16 @@ Color Color::operator/=(float scalar)
 {
     set(this->rgb / scalar);
     return *this;
+}
+
+float Color::distance(const Color &other)
+{
+    float deltaR = std::abs(this->rgb(0) - other.rgb(0));
+    float deltaG = std::abs(this->rgb(1) - other.rgb(1));
+    float deltaB = std::abs(this->rgb(2) - other.rgb(2));
+//    float dist = 3.f*deltaR + 4.f*deltaG + 3.f*deltaB;
+//    if (dist != 0) std::cout << dist << std::endl;
+    return (3.f*deltaR + 4.f*deltaG + 3.f*deltaB);
 }
 
 Color Color::red()

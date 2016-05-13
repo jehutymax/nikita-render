@@ -41,6 +41,10 @@ struct CameraSample
 
 struct Sample : public CameraSample
 {
+    Sample()
+        : CameraSample(0, 0) {}
+    Sample(int x, int y)
+        : CameraSample(x, y) {}
 };
 }
 

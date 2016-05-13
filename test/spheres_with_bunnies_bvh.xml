@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <nikita version="0.1">
     <scene version="0.5.0" background="0.2,0.2,0.2">
-        <!--<accelerator type="bvh" leafSize="1"/>-->
+        <accelerator type="bvh" leafSize="1"/>
         <light type="point">
             <float name="intensity" value="0.94"/>
             <color value="0.98,0.64,0.01"/>
@@ -137,7 +137,7 @@
             <film type="png">
                 <integer name="width" value="1080"/>
                 <integer name="height" value="1080"/>
-                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/spheres_bunnies_NO_bvh.png"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/spheres_bunnies_rays1.png"/>
             </film>
         </sensor>
     </scene>

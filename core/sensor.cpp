@@ -92,6 +92,31 @@ void RGBFilm::writeImage(const std::vector<nikita::Color> &samples)
     if (!out)
         return;
 
+    ImageSpec spec(resolutionX, resolutionY, 3, TypeDesc::UINT8);
+    std::vector<unsigned char> pixels;
+    for (int j = 0; j < resolutionY; j++)
+        for (int i = 0; i < resolutionX; i++)
+        {
+            int a = RGBFilm::toByte(samples[j * resolutionX + i].get(0));
+            int b = RGBFilm::toByte(samples[j * resolutionX + i].get(1));
+            int c = RGBFilm::toByte(samples[j * resolutionX + i].get(2));
+            pixels.push_back(a);
+            pixels.push_back(b);
+            pixels.push_back(c);
+        }
+    out->open(file, spec);
+    out->write_image(TypeDesc::UINT8, &pixels[0]);
+    out->close();
+
+    ImageOutput::destroy(out);
+}
+
+void RGBFilm::writeAveragedImage(const std::vector<Color> &samples)
+{
+    ImageOutput *out = ImageOutput::create(file);
+    if (!out)
+        return;
+
     std::vector<nikita::Color> averaged;
     averagePixels(samples, averaged);
 
@@ -102,7 +127,7 @@ void RGBFilm::writeImage(const std::vector<nikita::Color> &samples)
     std::vector<unsigned char> pixels;
     for (int j = 0; j < resY; j++)
         for (int i = 0; i < resX; i++)
-         {
+        {
             int a = RGBFilm::toByte(averaged[j * resX + i].get(0));
             int b = RGBFilm::toByte(averaged[j * resX + i].get(1));
             int c = RGBFilm::toByte(averaged[j * resX + i].get(2));

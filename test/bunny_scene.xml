@@ -46,7 +46,7 @@
             <film type="png">
                 <integer name="width" value="1080"/>
                 <integer name="height" value="1080"/>
-                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_BVH.png"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_superSampled.png"/>
             </film>
         </sensor>
     </scene>

@@ -18,6 +18,7 @@ public:
     Color(const RGB &rgb);
     Color(const Color &color);
 
+    Color operator-(const Color &other) const;
     Color operator+(const Color &other) const;
     Color operator+=(const Color &other);
     Color operator* (const Color &other) const;
@@ -27,6 +28,8 @@ public:
     Color operator*= (float scalar);
     Color operator/ (float scalar) const;
     Color operator/= (float scalar);
+
+    float distance(const Color &other);
 
     RGB get() const;
     float get(int) const;
