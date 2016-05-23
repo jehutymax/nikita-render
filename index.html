@@ -31,27 +31,105 @@
                 <p>This page holds the results produced with the first iteration of a simple ray tracer developed for a graduate course on Rendering at Drexel University.</p>
                 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Assignment #4 - Super Sampling</h3>
-                <p> Supersampling was implemented as seen in class. One interesting behavior is that by having 2 subdivisions (the number of subdivisions is configurable, but hasn't been exposed to the scene file), in an area, either no subdivision would be necessary, or the two levels would be used - there were zero pixels that subdivided once and returned. I did check the code twice to make sure the recursion was working properly. If we force the recursion to end with one iteration, the results do differ from 2 iterations, as shown below.</p>
-                <p><strong>2 bunnies, teapot, 2 white lights, 4 spheres</strong>
-                            <br>
-                            <p> Scene description file: <a href="images/spheres_with_bunnies_bvh.xml"> SCENE FILE.</a> </p></p>
-                 <div>
+                <p> <strong>UPDATE:</strong> After the deadline, and after the project was turned in, I modified the way the color comparison is carried out, in order to determine if further subdivision should happen. This fixed the problem of not having intermediate-level divisions taking place. The images below show ray samples (closer to white = more rays) with increasingly small thresholds. (Color channels are floats between 0 and 1. Threshold is the difference tolerated in each channel.) </p>
+                <div>
                     <table>
                         <tr>
                             <td>
-                           <p> <strong> No Antialiasing </strong> <br> 1.26s </p>
+                                <p> <strong> Ray Samples </strong>
+                                    <br> Threshold = 0.01 </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_0_01.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_0_01.png" width=200 height=200 align="left" />
+                                </a>
+                            </td>
+                            <td>
+                                <p> <strong> Ray Samples </strong>
+                                    <br> Threshold = 0.001 </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_0_001.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_0_001.png" width=200 height=200 align="center" />
+                                </a>
+                            </td>
+                            <td>
+                                <p> <strong> Ray Samples </strong>
+                                    <br> Threshold = 0.0007 </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_0_0007.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_0_0007.png" width=200 height=200 align="right" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p> <strong> Ray Samples </strong>
+                                    <br> Threshold = 0.0001 </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_0_0001.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_0_0001.png" width=200 height=200 align="left" />
+                                </a>
+                            </td>
+                            <td>
+                               <p> <strong> Ray Samples </strong>
+                                    <br> Threshold = 0.00001 </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_0_00001.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_0_00001.png" width=200 height=200 align="center" />
+                                </a>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                <br>
+                                <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p> <strong> Close-up to bunny ear </strong>
+                                    <br> After bug-fix! </p>
+                                <a href="images/antialiasing/aa_bugfix.png">
+                                    <img src="images/antialiasing/aa_bugfix.png" width=200 height=200 align="left" />
+                                </a>
+                            </td>
+                            <td>
+                                <p> <strong> Final image </strong>
+                                    <br> After bug-fix! </p>
+                                <a href="images/antialiasing/spheres_bunnies_rays_bugfix.png">
+                                    <img src="images/antialiasing/spheres_bunnies_rays_bugfix.png" width=200 height=200 align="center" />
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                <p><strong> END UPDATE! </strong> Everything from this point on was originally submitted.</p>
+                <p> Supersampling was implemented as seen in class. One interesting behavior is that by having 2 subdivisions (the number of subdivisions is configurable, but hasn't been exposed to the scene file), in an area, either no subdivision would be necessary, or the two levels would be used - there were zero pixels that subdivided once and returned. I did check the code twice to make sure the recursion was working properly. If we force the recursion to end with one iteration, the results do differ from 2 iterations, as shown below.</p>
+                <p><strong>2 bunnies, teapot, 2 white lights, 4 spheres</strong>
+                    <br>
+                    <p> Scene description file: <a href="images/spheres_with_bunnies_bvh.xml"> SCENE FILE.</a> </p>
+                </p>
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <p> <strong> No Antialiasing </strong>
+                                    <br> 1.26s </p>
                                 <a href="images/antialiasing/spheres_bunnies0.png">
                                     <img src="images/antialiasing/spheres_bunnies0.png" width=200 height=200 align="left" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> Averaging </strong> <br> 1.3s </p>
+                                <p> <strong> Averaging </strong>
+                                    <br> 1.3s </p>
                                 <a href="images/antialiasing/spheres_bunnies1.png">
                                     <img src="images/antialiasing/spheres_bunnies1.png" width=200 height=200 align="center" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> Adaptive Supersampling </strong> <br> 17.7s </p>
+                                <p> <strong> Adaptive Supersampling </strong>
+                                    <br> 17.7s </p>
                                 <a href="images/antialiasing/spheres_bunnies2.png">
                                     <img src="images/antialiasing/spheres_bunnies2.png" width=200 height=200 align="right" />
                                 </a>
@@ -60,24 +138,26 @@
                     </table>
                 </div>
                 <br>
-
                 <div>
                     <table>
                         <tr>
                             <td>
-                           <p> <strong> No Antialiasing </strong> <br> 1.26s </p>
+                                <p> <strong> No Antialiasing </strong>
+                                    <br> 1.26s </p>
                                 <a href="images/antialiasing/no_aa.png">
                                     <img src="images/antialiasing/no_aa.png" width=200 height=200 align="left" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> Averaging </strong> <br> 1.3s </p>
+                                <p> <strong> Averaging </strong>
+                                    <br> 1.3s </p>
                                 <a href="images/antialiasing/avg.png">
                                     <img src="images/antialiasing/avg.png" width=200 height=200 align="center" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> Adaptive Supersampling </strong> <br> 17.7s </p>
+                                <p> <strong> Adaptive Supersampling </strong>
+                                    <br> 17.7s </p>
                                 <a href="images/antialiasing/ss.png">
                                     <img src="images/antialiasing/ss.png" width=200 height=200 align="right" />
                                 </a>
@@ -86,23 +166,23 @@
                     </table>
                 </div>
                 <br>
-                 <div>
+                <div>
                     <table>
                         <tr>
                             <td>
-                           <p> <strong> SS - base case </strong> </p>
+                                <p> <strong> SS - base case </strong> </p>
                                 <a href="images/antialiasing/depth0.png">
                                     <img src="images/antialiasing/depth0.png" width=200 height=200 align="left" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> SS - 1 iteration </strong> </p>
+                                <p> <strong> SS - 1 iteration </strong> </p>
                                 <a href="images/antialiasing/depth1.png">
                                     <img src="images/antialiasing/depth1.png" width=200 height=200 align="center" />
                                 </a>
                             </td>
                             <td>
-                            <p> <strong> SS - 2 iterations </strong> </p>
+                                <p> <strong> SS - 2 iterations </strong> </p>
                                 <a href="images/antialiasing/depth2.png">
                                     <img src="images/antialiasing/depth2.png" width=200 height=200 align="right" />
                                 </a>
@@ -110,21 +190,22 @@
                         </tr>
                     </table>
                 </div>
-
                 <div>
                     <table>
                         <tr>
                             <td>
-                          
                             </td>
                             <td>
-                            <p> <strong> Sample Map </strong> <br> SS - 2 iterations <br> Zero pixels subdivided exactly after 1 iteration <br> Gray: returned from base case; <br> White: executed up to 2nd iteration;  </p>
+                                <p> <strong> Sample Map </strong>
+                                    <br> SS - 2 iterations
+                                    <br> Zero pixels subdivided exactly after 1 iteration
+                                    <br> Gray: returned from base case;
+                                    <br> White: executed up to 2nd iteration; </p>
                                 <a href="images/antialiasing/spheres_bunnies_rays1.png">
                                     <img src="images/antialiasing/spheres_bunnies_rays1.png" width=200 height=200 align="center" />
                                 </a>
                             </td>
                             <td>
-                           
                             </td>
                         </tr>
                     </table>
