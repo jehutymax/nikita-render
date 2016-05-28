@@ -79,6 +79,29 @@ bool GeoPrim::intersect(Ray &ray, IntersectionPtr isect)
     return hit;
 }
 
+bool GeoPrim::intersectP(Ray &ray, float maxDist)
+{
+    float t = 0;
+    bool hit = false;
+    if (shape->isIntersectable())
+        hit = shape->intersectP(ray, &t);
+    else
+    {
+        std::vector<ShapePtr> subshapes;
+        shape->divide(subshapes);
+        for (int l = 0; l < subshapes.size(); ++l) {
+            hit = subshapes[l]->intersectP(ray, &t);
+            if (hit && t < maxDist)
+                break;
+        }
+    }
+
+    if (hit)
+        ray.tMax = t;
+
+    return hit;
+}
+
 std::shared_ptr<GeoPrim> GeoPrim::getPtr()
 {
     return shared_from_this();
@@ -125,6 +148,18 @@ bool NonAcceleratedCollection::intersect(Ray &ray, IntersectionPtr isect)
     bool hit = false;
     for (int k = 0; k < objects.size(); k++)
         hit |=  objects[k]->intersect(ray, isect);
+
+    return hit;
+}
+
+bool NonAcceleratedCollection::intersectP(Ray &ray, float maxDist)
+{
+    bool hit = false;
+    for (int k = 0; k < objects.size(); k++) {
+        hit = objects[k]->intersectP(ray, maxDist);
+        if (hit)
+            break;
+    }
 
     return hit;
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0" background="0.2,0.2,0.2">
+        <accelerator type="bvh" leafSize="1"/>
+        <light type="point">
+            <float name="intensity" value="0.94"/>
+            <color value="0.98,0.98,0.98"/>
+            <transform name="LightToWorld">
+                <translate x="0" y="4" z="0"/>
+            </transform>
+        </light>
+        <!--<light type="point">-->
+        <!--<float name="intensity" value="0.99"/>-->
+        <!--<color value="0.99,0.99,0.99"/>-->
+        <!--<transform name="LightToWorld">-->
+        <!--<translate x="0" y="2" z="3"/>-->
+        <!--</transform>-->
+        <!--</light>-->
+        <!--<light type="point">-->
+        <!--<float name="intensity" value="0.86"/>-->
+        <!--<color value="0.98,0.28,0.01"/>-->
+        <!--<transform name="LightToWorld">-->
+        <!--<translate x="1.6" y="5" z="5"/>-->
+        <!--</transform>-->
+        <!--</light>-->
+        <light type="ambient">
+            <float name="intensity" value="0.6"/>
+            <color value="0.98,0.97,0.96"/>
+        </light>
+
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <translate x="0" y="-1" z="0"/>
+                <rotate y="1" angle="150"/>
+                <scale value="2"/>
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="4.5"/>
+                <float name="kr" value="0.99"/>
+                <color value="0.98,0.64,0.01"/>
+            </material>
+        </shape>
+
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <translate x="0" y="1.1" z="0"/>
+                <rotate y="1" angle="150"/>
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="exp" value="2"/>
+                <float name="kr" value="0.9"/>
+                <color value="0.44,0.44,0.77"/>
+            </material>
+        </shape>
+
+        <sensor type="perspective">
+            <transform name="toWorld">
+                <lookat origin="-2, 1, 0" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <film type="png">
+                <integer name="width" value="1080"/>
+                <integer name="height" value="1080"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunnies.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>

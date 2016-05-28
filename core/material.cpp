@@ -7,6 +7,12 @@
 using nikita::Material;
 using nikita::Matte;
 using nikita::Phong;
+using nikita::Reflective;
+
+nikita::BRDFPtr Material::getReflective()
+{
+    return nullptr;
+}
 
 Matte::Matte() : Material()
 {
@@ -100,4 +106,27 @@ nikita::BRDFPtr Phong::getDiffuse()
 nikita::BRDFPtr Phong::getSpecular()
 {
     return glossy;
+}
+
+Reflective::Reflective() : Phong()
+{
+    mirror = std::make_shared<Mirror>();
+    setKr(0.25);
+    setCd(Color::blue());
+}
+
+void Reflective::setKr(float k)
+{
+    this->mirror->setK(k);
+}
+
+void Reflective::setCd(const Color &c)
+{
+    Phong::setCd(c);
+    this->mirror->setColor(c);
+}
+
+nikita::BRDFPtr Reflective::getReflective()
+{
+    return mirror;
 }

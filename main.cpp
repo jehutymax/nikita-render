@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
 
 //    nikita::SimpleRenderer renderer(parser.getCamera());
 
-    nikita::SuperSamplerRenderer renderer(parser.getCamera());
-    renderer.render(scene);
+    nikita::RendererPtr ssr = std::make_shared<nikita::SuperSamplerRenderer>(parser.getCamera());
+    ssr->render(scene);
 
     return 0;
 }

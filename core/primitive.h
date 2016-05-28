@@ -7,15 +7,12 @@
 
 #include "nikita.h"
 #include "ray.h"
-#include "intersection.h"
-#include "shape.h"
+#include "shading/intersection.h"
+#include "shapes/shape.h"
 #include "material.h"
 
 namespace nikita
 {
-class Shape;
-typedef std::shared_ptr<Shape> ShapePtr;
-
 class Primitive
 {
 public:
@@ -25,6 +22,7 @@ public:
     virtual bool divide(std::vector<std::shared_ptr<Primitive>> &divided) const = 0;
     virtual bool fullyDivide(std::vector<std::shared_ptr<Primitive>> &divided) const {return false;};
     virtual bool intersect(Ray &ray, IntersectionPtr isect) = 0;
+    virtual bool intersectP(Ray &ray, float maxDist) = 0;
 
     virtual BoundingBox objectBound() const {return BoundingBox(); };
     virtual BoundingBox worldBound() const {return BoundingBox(); };
@@ -42,6 +40,7 @@ public:
     virtual bool divide(std::vector<PrimPtr> &divided) const;
     virtual bool fullyDivide(std::vector<PrimPtr> &divided) const;
     virtual bool intersect(Ray &ray, IntersectionPtr isect);
+    virtual bool intersectP(Ray &ray, float maxDist);
 
     virtual BoundingBox objectBound() const;
     virtual BoundingBox worldBound() const;
@@ -65,6 +64,7 @@ public:
     virtual bool divide(std::vector<PrimPtr> &divided) const;
     virtual bool fullyDivide(std::vector<PrimPtr> &divided) const;
     virtual bool intersect(Ray &ray, IntersectionPtr isect);
+    virtual bool intersectP(Ray &ray, float maxDist);
 
     std::vector<GeoPrimPtr> objects;
 };

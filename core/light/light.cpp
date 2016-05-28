@@ -4,10 +4,16 @@
 
 #include "light.h"
 
+using nikita::Light;
 using nikita::PointLight;
 using nikita::AmbientLight;
 
-PointLight::PointLight(const TransformPtr &light2World, int nSamples) : Light(light2World, nSamples)
+bool Light::castsShadow()
+{
+    return this->shadow;
+}
+
+PointLight::PointLight(const TransformPtr &light2World, int nSamples) : Light(light2World, nSamples, true)
 {
     this->lightPosition = light2World->applyP(Point(0,0,0));
     this->lightColor = Color::white();
@@ -16,7 +22,7 @@ PointLight::PointLight(const TransformPtr &light2World, int nSamples) : Light(li
 
 Vector PointLight::getDirection(const Point &p)
 {
-    return (this->lightPosition - p).normalized();
+    return ((this->lightPosition - p).normalized());
 }
 
 nikita::Color PointLight::getRadiance()
@@ -39,8 +45,15 @@ void PointLight::setColor(const Color &color)
     this->lightColor = color;
 }
 
+bool PointLight::testVisibility(Ray &ray, PrimPtr primGroup) const
+{
+    float distance = (this->lightPosition - ray.origin).norm();
+//    float distance = Infinity;
+    return primGroup->intersectP(ray, distance);
+}
+
 AmbientLight::AmbientLight(const TransformPtr t, int)
-    : Light(t, 1.0),
+    : Light(t, 1.0, false),
       lightIntensity(0.3),
       lightColor(Color::white())
 { }
@@ -68,4 +81,9 @@ void AmbientLight::setIntensity(float intensity)
 void AmbientLight::setColor(const Color &color)
 {
     this->lightColor = color;
+}
+
+bool AmbientLight::testVisibility(Ray &ray, PrimPtr primGroup) const
+{
+    return false;
 }

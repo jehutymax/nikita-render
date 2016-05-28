@@ -14,7 +14,7 @@ Ray::Ray()
       depth(0)
 {}
 
-Ray::Ray(const Point &o, const Vector &d, float tMin, float tMax = Infinity)
+Ray::Ray(const Point &o, const Vector &d, float tMin, float tMax)
     : origin(o), direction(d), tMin(tMin),  tMax(tMax), depth(0)
 {}
 

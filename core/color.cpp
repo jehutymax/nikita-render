@@ -87,9 +87,23 @@ float Color::distance(const Color &other)
     float deltaR = std::abs(this->rgb(0) - other.rgb(0));
     float deltaG = std::abs(this->rgb(1) - other.rgb(1));
     float deltaB = std::abs(this->rgb(2) - other.rgb(2));
-//    float dist = 3.f*deltaR + 4.f*deltaG + 3.f*deltaB;
-//    if (dist != 0) std::cout << dist << std::endl;
-    return (3.f*deltaR + 4.f*deltaG + 3.f*deltaB);
+
+    Vector euclideanDistance(deltaR, deltaG, deltaB);
+//    if (euclideanDistance.norm() != 0.0)
+//        std::cout << euclideanDistance.norm() << std::endl;
+
+return euclideanDistance.norm();
+}
+
+bool Color::isSimilarTo(const Color &other, float tolerance)
+{
+    float deltaR = std::abs(this->rgb(0) - other.rgb(0));
+    float deltaG = std::abs(this->rgb(1) - other.rgb(1));
+    float deltaB = std::abs(this->rgb(2) - other.rgb(2));
+
+    return ((deltaR < tolerance) &&
+            (deltaG < tolerance) &&
+            (deltaB < tolerance));
 }
 
 Color Color::red()

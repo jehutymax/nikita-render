@@ -3,8 +3,9 @@
 //
 
 #include "sphere.h"
-#include "../numerical/quadratic.h"
+#include "../../numerical/quadratic.h"
 
+const float kEpsilon = 1e-3f;
 using nikita::Sphere;
 
 Sphere::Sphere(const TransformPtr obj2World, const TransformPtr world2Obj, float radius)
@@ -46,10 +47,33 @@ bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
     nikita::Ray ray;
     //transform incoming ray to object-space
     ray = (*worldToObject)(r);
+
+    bool hit = calculateIntersection(r, t);
+
+    if (hit) {
+        // fill Intersection object
+        ip->hit = true;
+        ip->hitPoint = r(*t);
+        ip->normal = (ray.origin + (*t) * ray.direction) / this->radius;
+    }
+
+    return hit;
+}
+
+bool Sphere::intersectP(const Ray &r, float *t) const
+{
+    return calculateIntersection(r, t);
+}
+
+bool Sphere::calculateIntersection(const Ray &r, float *t) const
+{
+    nikita::Ray ray;
+    //transform incoming ray to object-space
+    ray = (*worldToObject)(r);
     float a = ray.direction.squaredNorm();
     float b = 2.0f * (ray.direction(0) * ray.origin(0) +
-                     ray.direction(1) * ray.origin(1) +
-                     ray.direction(2) * ray.origin(2));
+        ray.direction(1) * ray.origin(1) +
+        ray.direction(2) * ray.origin(2));
     float c = ray.origin.squaredNorm() - (this->radius * this->radius);
 
     float x0 = 0, x1 = 0;
@@ -71,7 +95,7 @@ bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
     // and if it isn't, verify if the hit still is a hit.
     Point phi_t = ray(hit);
     if (phi_t(0) == 0.0f && phi_t(1) == 0.0f)
-        phi_t(0) = 0.00001 * this->radius; // avoid division by zero in the arc tangent of y/x
+        phi_t(0) = 1e-5f * this->radius; // avoid division by zero in the arc tangent of y/x
 
     float phi = atan2f(phi_t(1), phi_t(0));
     if (phi < 0.0f)
@@ -91,13 +115,10 @@ bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
             return false;
     }
 
-    *t = hit;
-
-    // fill Intersection object
-    ip->hit = true;
-    ip->hitPoint = r(hit);
-    ip->normal = (ray.origin + hit * ray.direction) / this->radius;
-
-    return true;
-
+    if (hit > kEpsilon) {
+        *t = hit;
+        return true;
+    }
+    else
+        return false;
 }

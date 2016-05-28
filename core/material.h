@@ -6,8 +6,8 @@
 #define NIKITA_RENDER_MATERIAL_H
 
 #include "color.h"
-#include "bxdf.h"
-#include "light.h"
+#include "shading/bxdf.h"
+#include "light/light.h"
 
 namespace nikita
 {
@@ -17,6 +17,7 @@ public:
     virtual BRDFPtr getAmbient() = 0;
     virtual BRDFPtr getDiffuse() = 0;
     virtual BRDFPtr getSpecular() = 0;
+    virtual BRDFPtr getReflective();
 };
 
 class Matte : public Material
@@ -44,7 +45,7 @@ public:
     void setKd(float k);
     void setKs(float k);
     void setExp(float e);
-    void setCd(const Color &c);
+    virtual void setCd(const Color &c);
 
     virtual BRDFPtr getAmbient();
     virtual BRDFPtr getDiffuse();
@@ -55,9 +56,22 @@ private:
     GlossyPtr glossy;
 };
 
+class Reflective : public Phong
+{
+public:
+    Reflective();
+    void setKr(float k);
+    virtual void setCd(const Color &c);
+
+    virtual BRDFPtr getReflective();
+private:
+    MirrorPtr mirror;
+};
+
 typedef std::shared_ptr<Material> MaterialPtr;
 typedef std::shared_ptr<Matte> MattePtr;
 typedef std::shared_ptr<Phong> PhongPtr;
+typedef std::shared_ptr<Reflective> ReflectivePtr;
 
 }
 

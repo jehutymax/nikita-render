@@ -25,8 +25,19 @@ static constexpr float InvPi = 1.0f/Pi;
 
 namespace nikita
 {
+// forward declarations
+class Primitive;
+class Material;
 class Intersection;
+class Shape;
+class Renderer;
+class GeoPrim;
+typedef std::shared_ptr<GeoPrim> GeoPrimPtr;
+typedef std::shared_ptr<Shape> ShapePtr;
 typedef std::shared_ptr<Intersection> IntersectionPtr;
+typedef std::shared_ptr<Material> MaterialPtr;
+typedef std::shared_ptr<Primitive> PrimPtr;
+typedef std::shared_ptr<Renderer> RendererPtr;
 }
 
 #endif //NIKITA_RENDER_NIKITA_H

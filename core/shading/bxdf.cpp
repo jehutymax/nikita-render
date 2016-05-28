@@ -7,14 +7,15 @@
 using nikita::BxDF;
 using nikita::Lambertian;
 using nikita::Glossy;
+using nikita::Mirror;
 using nikita::Color;
 
-Color Lambertian::f(const Vector &wi, const Vector &wo, const Normal &n) const
+Color Lambertian::f(Vector &wi, const Vector &wo, const Normal &n) const
 {
-    return sample_f(wi, wo);
+    return sample_f(wi, wo, n);
 }
 
-Color Lambertian::sample_f(const Vector &wi, const Vector &wo) const
+Color Lambertian::sample_f(Vector &wi, const Vector &wo, const Normal &n) const
 {
     return (kd * InvPi * cd);
 }
@@ -34,7 +35,7 @@ void Lambertian::setCd(const Color &c)
     cd = c;
 }
 
-Color Glossy::f(const Vector &wi, const Vector &wo, const Normal &n) const
+Color Glossy::f(Vector &wi, const Vector &wo, const Normal &n) const
 {
     Color L;
     float dp = n.dot(wi);
@@ -47,15 +48,6 @@ Color Glossy::f(const Vector &wi, const Vector &wo, const Normal &n) const
     return L;
 }
 
-Color Glossy::sample_f(const Vector &wi, const Vector &wo) const
-{
-    return Color::black(); // not implemented.
-}
-
-Color Glossy::rho(const Vector &wo) const
-{
-    return Color::black();
-}
 
 void Glossy::setColor(const Color &c)
 {
@@ -70,4 +62,24 @@ void Glossy::setExp(float e)
 void Glossy::setK(float k)
 {
     this->k = k;
+}
+
+Color Mirror::sample_f(Vector &wi, const Vector &wo, const Normal &n) const
+{
+    float dp = n.dot(wo);
+    wi = -wo + 2.0f * n * dp;
+
+    float dp2 = n.dot(wi);
+
+    return ((this->k * this->c) / dp2);
+}
+
+void Mirror::setK(float k)
+{
+    this->k = k;
+}
+
+void Mirror::setColor(const Color &c)
+{
+    this->c = c;
 }

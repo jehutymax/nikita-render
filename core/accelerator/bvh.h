@@ -22,8 +22,9 @@ class BVH : public Primitive
 {
 public:
     BVH(const std::vector<GeoPrimPtr>&prims, uint32_t numLeafPrims);
-    bool intersect(Ray &ray, IntersectionPtr isect);
-    static inline bool intersectP(const BBoxPtr bbox,
+    virtual bool intersect(Ray &ray, IntersectionPtr isect);
+    virtual bool intersectP(Ray &ray, float maxDist);
+    static inline bool intersectSlabs(const BBoxPtr bbox,
                                   const Ray &ray,
                                   const Vector &dirDiv,
                                   const bool negativeDirs[3]);

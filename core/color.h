@@ -30,6 +30,7 @@ public:
     Color operator/= (float scalar);
 
     float distance(const Color &other);
+    bool isSimilarTo(const Color &other, float tolerance);
 
     RGB get() const;
     float get(int) const;

@@ -9,7 +9,7 @@
 #include "../scene.h"
 #include "../camera.h"
 #include "../../util/cpuTimer.h"
-#include "../surfaceShader.h"
+#include "../shading/surfaceShader.h"
 
 #include <unordered_map>
 
@@ -59,8 +59,8 @@ class Renderer
 {
 public:
     virtual void render(const ScenePtr scene) = 0;
-//    virtual float incidentRadiance();
-//
+    virtual Color shootRay(const ScenePtr scene, Ray &ray, int depth = 0) = 0;
+
 };
 
 
@@ -69,17 +69,19 @@ class SimpleRenderer : public Renderer
 public:
     SimpleRenderer(CameraPtr camera);
     virtual void render(const ScenePtr scene);
+    virtual Color shootRay(const ScenePtr scene, Ray &ray, int depth = 0);
 private:
     CameraPtr camera;
     SamplerPtr sampler;
     ShaderPtr shader;
 };
 
-class SuperSamplerRenderer : public Renderer
+class SuperSamplerRenderer : public std::enable_shared_from_this<SuperSamplerRenderer>, public Renderer
 {
 public:
     SuperSamplerRenderer(CameraPtr camera);
     virtual void render(const ScenePtr scene);
+    virtual Color shootRay(const ScenePtr scene, Ray &ray, int depth = 0);
 private:
     CameraPtr camera;
     SamplerPtr sampler;
@@ -87,6 +89,7 @@ private:
     ScenePtr scene;
     int maxDepth;
     float threshold;
+    int maxBounces;
 
     // Pixel or subpixel:
     // a---b
@@ -94,7 +97,7 @@ private:
     // d---c
     Color processSquare(ImageCoord a, ImageCoord b, ImageCoord c, ImageCoord d, int depth = 0);
     int processSquareNoShading(ImageCoord a, ImageCoord b, ImageCoord c, ImageCoord d, int depth = 0);
-    Color shootRay(CameraSample s);
+    Color processRay(CameraSample s);
 
     std::unordered_map<ImageCoord, Color> computedRays;
     bool pixelExists(const ImageCoord &c, Color &color);

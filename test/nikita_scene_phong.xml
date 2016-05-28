@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <nikita version="0.1">
     <scene version="0.5.0">
-        <!--<accelerator type="bvh" leafSize="1"/>-->
+        <accelerator type="bvh" leafSize="1"/>
         <shape type="sphere">
             <float name="radius" value="0.8"/>
             <float name="phi" value="360.0"/>

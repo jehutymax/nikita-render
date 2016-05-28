@@ -5,16 +5,20 @@
 #ifndef NIKITA_RENDER_LIGHT_H
 #define NIKITA_RENDER_LIGHT_H
 
-#include "nikita.h"
-#include "transform.h"
-#include "color.h"
+#include "../nikita.h"
+#include "../transform.h"
+#include "../color.h"
+#include "../primitive.h"
 
 namespace nikita
 {
 class Light
 {
 public:
-    Light(const TransformPtr &light2World, int nSamples) : lightToWorld(light2World), numberSamples(nSamples)
+    Light(const TransformPtr &light2World, int nSamples, bool shadows) :
+        lightToWorld(light2World),
+        numberSamples(nSamples),
+        shadow(shadows)
     {}
     virtual void setColor(const Color &color) = 0;
     virtual void setIntensity(float intensity) = 0;
@@ -22,9 +26,14 @@ public:
     virtual Color getRadiance() = 0;
     virtual Color getPower() = 0;
 
+    virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const = 0;
+
+    virtual bool castsShadow();
+
 protected:
     TransformPtr lightToWorld;
     int numberSamples;
+    bool shadow;
 };
 
 class PointLight : public Light
@@ -36,6 +45,7 @@ public:
     virtual Color getPower();
     virtual void setIntensity(float intensity);
     virtual void setColor(const Color &color);
+    virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const;
 private:
     Point lightPosition;
     Color lightColor;
@@ -51,6 +61,8 @@ public:
     virtual Color getPower();
     virtual void setIntensity(float intensity);
     virtual void setColor(const Color &color);
+    virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const;
+
 private:
     Color lightColor;
     float lightIntensity;

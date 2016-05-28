@@ -4,7 +4,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include "../util/smfReader.h"
-#include "../core/triangleMesh.h"
+#include "../core/shapes/triangleMesh.h"
 #include "../core/accelerator/BoundingBox.h"
 
 class TestShapes: public CppUnit::TestCase

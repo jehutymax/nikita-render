@@ -7,8 +7,8 @@
 
 #include "../core/nikita.h"
 #include "../core/scene.h"
-#include "../core/sphere.h"
-#include "../core/triangleMesh.h"
+#include "../core/shapes/sphere.h"
+#include "../core/shapes/triangleMesh.h"
 #include "../core/sensor.h"
 #include "../core/camera.h"
 #include "../core/primitive.h"
@@ -66,7 +66,7 @@ namespace nikita {
 
         enum SceneTag {
             NIKITA, SCENE, SHAPE, SPHERE, SMF, OBJ, SENSOR, MATERIAL, SAMPLER, FILM, INTEGER, FLOAT, BOOLEAN, TRANSLATE, ROTATE, LOOKAT,
-            SCALE, POINT, VECTOR, TRANSFORM, MATTE, PHONG, LIGHT, AMBIENT, ACCELERATOR, DEFAULT,
+            SCALE, POINT, VECTOR, TRANSFORM, MATTE, PHONG, REFLECTIVE, LIGHT, AMBIENT, ACCELERATOR, DEFAULT,
         };
 
         struct SceneTagMap : public std::map<std::string, SceneTag>
@@ -95,6 +95,7 @@ namespace nikita {
                 this->operator[]("transform") = TRANSFORM;
                 this->operator[]("matte") = MATTE;
                 this->operator[]("phong") = PHONG;
+                this->operator[]("reflective") = REFLECTIVE;
                 this->operator[]("light") = LIGHT;
                 this->operator[]("ambient") = AMBIENT;
                 this->operator[]("accelerator") = ACCELERATOR;

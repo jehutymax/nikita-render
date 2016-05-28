@@ -46,7 +46,8 @@ namespace nikita
                     TriangleMesh* parent, int id);
 
         bool isIntersectable();
-        bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
+        virtual bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
+        virtual bool intersectP(const Ray &ray, float *t) const;
         virtual BoundingBox objectBound() const;
         virtual BoundingBox worldBound() const;
 
@@ -59,6 +60,8 @@ namespace nikita
     private:
         TriangleMesh *mesh;
         int triangleNumber;
+
+        bool calculateIntersection(const Ray &ray, float *t, float *b1, float *b2) const;
 
     };
 

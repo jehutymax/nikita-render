@@ -170,7 +170,7 @@ bool BVH::intersect(Ray &ray, IntersectionPtr isect)
     {
         const LinearNodePtr node = nodes[nodeNumber];
         // check ray against the node
-        if (intersectP(node->bbox, ray, directionDivider, directionIsNegative))
+        if (intersectSlabs(node->bbox, ray, directionDivider, directionIsNegative))
         {
             if (node->numberPrimitives > 0)
             {
@@ -209,7 +209,64 @@ bool BVH::intersect(Ray &ray, IntersectionPtr isect)
     return hit;
 }
 
-bool BVH::intersectP(const BBoxPtr bbox, const Ray &ray,
+bool BVH::intersectP(Ray &ray, float maxDist)
+{
+    if (nodes.empty())
+        return false;
+
+    Vector directionDivider;
+    directionDivider << 1.0f/ray.direction(0), 1.0f/ray.direction(1), 1.0f/ray.direction(2);
+    bool directionIsNegative[3] = {directionDivider(0) < 0,
+                                   directionDivider(1) < 0,
+                                   directionDivider(2) < 0};
+
+    // follow the ray through the tree's nodes to find intersections
+    unsigned int toVisitOffset = 0;
+    unsigned int nodeNumber = 0;
+    unsigned int toVisit[64];
+    while(true)
+    {
+        const LinearNodePtr node = nodes[nodeNumber];
+        // check ray against the node
+        if (intersectSlabs(node->bbox, ray, directionDivider, directionIsNegative))
+        {
+            if (node->numberPrimitives > 0)
+            {
+                // proceed to intersect ray with primitives in leaf
+                for (int i = 0; i < node->numberPrimitives; ++i) {
+                    if (objects[node->primOffset+i]->intersectP(ray, maxDist))
+                        return true;
+                }
+                if (toVisitOffset == 0)
+                    break;
+                nodeNumber = toVisit[--toVisitOffset];
+            }
+            else
+            {
+                // put distant node on stack, advance to next node
+                if (directionIsNegative[node->axis])
+                {
+                    toVisit[toVisitOffset++] = nodeNumber + 1;
+                    nodeNumber = node->secondChildOffset;
+                }
+                else
+                {
+                    toVisit[toVisitOffset++] = node->secondChildOffset;
+                    nodeNumber = nodeNumber + 1;
+                }
+            }
+        }
+        else
+        {
+            if (toVisitOffset == 0)
+                break;
+            nodeNumber = toVisit[--toVisitOffset];
+        }
+    }
+    return false;
+}
+
+bool BVH::intersectSlabs(const BBoxPtr bbox, const Ray &ray,
                      const Vector &dirDiv, const bool *negativeDirs)
 {
     float tMin[3], tMax[3];

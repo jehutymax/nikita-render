@@ -13,7 +13,7 @@ class Ray
 {
 public:
     Ray();
-    Ray(const Point& origin, const Vector& direction, float tMin, float tMax);
+    Ray(const Point& origin, const Vector& direction, float tMin, float tMax = Infinity);
 
     Point operator()(float t) const;
 

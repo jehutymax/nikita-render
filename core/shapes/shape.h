@@ -5,11 +5,11 @@
 #ifndef NIKITA_RENDER_SHAPE_H
 #define NIKITA_RENDER_SHAPE_H
 
-#include "nikita.h"
-#include "transform.h"
-#include "ray.h"
-#include "intersection.h"
-#include "accelerator/BoundingBox.h"
+#include "../nikita.h"
+#include "../transform.h"
+#include "../ray.h"
+#include "../shading/intersection.h"
+#include "../accelerator/BoundingBox.h"
 
 namespace nikita
 {
@@ -33,6 +33,11 @@ public:
     virtual bool fullyDivide(std::vector<std::shared_ptr<Shape>> &divided) {return false;}
 
     virtual bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const
+    {
+        return false;
+    }
+
+    virtual bool intersectP(const Ray &ray, float *t) const
     {
         return false;
     }

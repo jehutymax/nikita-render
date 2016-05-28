@@ -11,4 +11,7 @@ bool Scene::intersect(Ray &ray, IntersectionPtr &is) const
     return primitive->intersect(ray, is);
 }
 
-
+bool Scene::intersectP(Ray &ray, float maxDist) const
+{
+    return primitive->intersectP(ray, maxDist);
+}

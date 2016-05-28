@@ -6,9 +6,9 @@
 #define NIKITA_RENDER_SCENE_H
 
 #include <vector>
-#include "shape.h"
-#include "intersection.h"
-#include "light.h"
+#include "shapes/shape.h"
+#include "shading/intersection.h"
+#include "light/light.h"
 #include "primitive.h"
 
 namespace nikita
@@ -18,8 +18,8 @@ namespace nikita
     public:
 
         bool intersect(Ray &ray, IntersectionPtr &is) const;
+        bool intersectP(Ray &ray, float maxDist) const;
 
-//        std::vector<GeoPrimPtr> objects;
         PrimPtr primitive;
         std::vector<LightPtr> lights;
         AmbientLightPtr ambientLight;

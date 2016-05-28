@@ -207,6 +207,32 @@ nikita::MaterialPtr sceneParser::processMaterial(const OIIO::pugi::xml_node &nod
             phong->setCd(cd);
             return MaterialPtr(phong);
         }
+        case REFLECTIVE: {
+            float ka;
+            if (!getFloat(materialNode, "ka", &ka))
+                ka = 0;
+            float kd;
+            if (!getFloat(materialNode, "kd", &kd))
+                kd = 0;
+            float ks;
+            if (!getFloat(materialNode, "ks", &ks))
+                ks = 0;
+            float kr;
+            if (!getFloat(materialNode, "kr", &kr))
+                kr = 0;
+            float exp;
+            if (!getFloat(materialNode, "exp", &exp))
+                exp = 6;
+            Color cd = getColor(materialNode);
+            ReflectivePtr whitted = std::make_shared<Reflective>();
+            whitted->setKa(ka);
+            whitted->setKd(kd);
+            whitted->setKs(ks);
+            whitted->setExp(exp);
+            whitted->setCd(cd);
+            whitted->setKr(kr);
+            return MaterialPtr(whitted);
+        }
         default:
             std::cout << getType(node) << " not understood." << std::endl;
             return nullptr;
@@ -459,15 +485,15 @@ void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)
     std::string file;
     getString(node, "filename", &file);
 
-    std::vector<float> trianglePos;
-    std::vector<int> faces;
+    std::vector<float> vertPos;
+    std::vector<int> triangles;
 
-    SmfReader::getGeometry(file.c_str(), trianglePos, faces);
+    SmfReader::getGeometry(file.c_str(), vertPos, triangles);
 
-    int numTriangles = faces.size() / 3;
+    int numTriangles = triangles.size() / 3;
     TransformPtr pt = processTransform(node);
     TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
-    ShapePtr trianglePtr = std::make_shared<TriangleMesh>(pt, ptInv, numTriangles, trianglePos.size(), trianglePos, faces);
+    ShapePtr trianglePtr = std::make_shared<TriangleMesh>(pt, ptInv, numTriangles, vertPos.size(), vertPos, triangles);
     MaterialPtr materialPtr = processMaterial(node);
     objects.push_back(std::make_shared<GeoPrim>(trianglePtr, materialPtr));
     std::cout << "SMF file was loaded with " << numTriangles << " triangles." << std::endl;

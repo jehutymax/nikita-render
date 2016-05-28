@@ -27,10 +27,10 @@ set(SOURCE_FILES
         util/sceneParser.cpp
         util/sceneParser.h
         core/transform.h
-        core/shape.h
+        core/shapes/shape.h
         core/nikita.h
-        core/triangleMesh.cpp
-        core/triangleMesh.h
+        core/shapes/triangleMesh.cpp
+        core/shapes/triangleMesh.h
         util/smfReader.cpp
         util/smfReader.h
         util/stringUtils.cpp
@@ -38,8 +38,8 @@ set(SOURCE_FILES
         core/accelerator/BoundingBox.cpp
         core/accelerator/BoundingBox.h
         util/mathUtils.h
-        core/sphere.cpp
-        core/sphere.h
+        core/shapes/sphere.cpp
+        core/shapes/sphere.h
         core/ray.cpp
         core/ray.h
         numerical/quadratic.h
@@ -57,16 +57,16 @@ set(SOURCE_FILES
         util/cpuTimer.h
         core/color.cpp
         core/color.h
-        core/light.cpp
-        core/light.h
-        core/bxdf.cpp
-        core/bxdf.h
-        core/intersection.cpp
-        core/intersection.h
+        core/light/light.cpp
+        core/light/light.h
+        core/shading/bxdf.cpp
+        core/shading/bxdf.h
+        core/shading/intersection.cpp
+        core/shading/intersection.h
         core/primitive.cpp
         core/primitive.h
-        core/surfaceShader.cpp
-        core/surfaceShader.h
+        core/shading/surfaceShader.cpp
+        core/shading/surfaceShader.h
         core/material.cpp
         core/material.h
         core/accelerator/bvh.cpp core/accelerator/bvh.h)
@@ -82,7 +82,7 @@ set(TEST_SOURCE_FILES
         core/ray.cpp
         core/ray.h
         test/TestNumerical.cpp
-        core/triangleMesh.cpp
+        core/shapes/triangleMesh.cpp
         core/color.cpp
         test/TestColor.cpp)
 

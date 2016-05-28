@@ -7,10 +7,10 @@
 
 #include <math.h>
 
-#include "nikita.h"
+#include "../nikita.h"
 #include "shape.h"
-#include "accelerator/BoundingBox.h"
-#include "../util/mathUtils.h"
+#include "../accelerator/BoundingBox.h"
+#include "../../util/mathUtils.h"
 
 namespace nikita
 {
@@ -26,12 +26,15 @@ public:
 
     bool isIntersectable();
     bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
+    bool intersectP(const Ray &ray, float *t) const;
 
 private:
     float radius;
     float phiMax;
     float zMin, zMax;
     float thetaMin, thetaMax; // derived information
+
+    bool calculateIntersection(const Ray &ray, float *t) const;
 };
 }
 
