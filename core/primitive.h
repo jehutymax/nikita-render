@@ -9,7 +9,7 @@
 #include "ray.h"
 #include "shading/intersection.h"
 #include "shapes/shape.h"
-#include "material.h"
+#include "shading/material.h"
 
 namespace nikita
 {

@@ -8,6 +8,7 @@
 #include "../core/nikita.h"
 #include "../core/scene.h"
 #include "../core/shapes/sphere.h"
+#include "../core/shapes/cylinder.h"
 #include "../core/shapes/triangleMesh.h"
 #include "../core/sensor.h"
 #include "../core/camera.h"
@@ -42,6 +43,9 @@ namespace nikita {
         void processShape(const OIIO::pugi::xml_node &node);
         void processSensor(const OIIO::pugi::xml_node &node);
         MaterialPtr processMaterial(const OIIO::pugi::xml_node &node);
+        TexturePtr processTexture(const Node &node);
+        TexturePtr processImageTexture(const Node &node);
+        TexturePtr processProceduralTexture(const Node &node);
         void processLight(const Node &node);
         void processAccelerator(const Node &node);
         TransformPtr processTransform(const Node &node);
@@ -52,8 +56,10 @@ namespace nikita {
         bool useAcceleration(const Node &scene);
         bool hasTransform(const Node& parentNode);
         bool hasMaterial(const Node& parentNode);
+        bool hasTexture(const Node& parentNode);
         bool hasColor(const Node& parentNode);
         void createSphere(const OIIO::pugi::xml_node &node);
+        void createCylinder(const Node &node);
         void createTriangleMesh(const OIIO::pugi::xml_node &node);
         bool getInteger(const Node& node, const std::string &property, int *result);
         bool getFloat(const Node& node, const std::string &property, float *result);
@@ -65,8 +71,8 @@ namespace nikita {
 
 
         enum SceneTag {
-            NIKITA, SCENE, SHAPE, SPHERE, SMF, OBJ, SENSOR, MATERIAL, SAMPLER, FILM, INTEGER, FLOAT, BOOLEAN, TRANSLATE, ROTATE, LOOKAT,
-            SCALE, POINT, VECTOR, TRANSFORM, MATTE, PHONG, REFLECTIVE, LIGHT, AMBIENT, ACCELERATOR, DEFAULT,
+            NIKITA, SCENE, SHAPE, SPHERE, CYLINDER, SMF, OBJ, TEXTURE, IMAGE, PROCEDURAL, SENSOR, MATERIAL, SAMPLER, FILM, INTEGER, FLOAT, BOOLEAN, TRANSLATE, ROTATE, LOOKAT,
+            SCALE, POINT, SPOT, VECTOR, TRANSFORM, MATTE, PHONG, REFLECTIVE, TRANSPARENT, LIGHT, AMBIENT, ACCELERATOR, DEFAULT,
         };
 
         struct SceneTagMap : public std::map<std::string, SceneTag>
@@ -77,6 +83,7 @@ namespace nikita {
                 this->operator[]("scene") = SCENE;
                 this->operator[]("shape") = SHAPE;
                 this->operator[]("sphere") = SPHERE;
+                this->operator[]("cylinder") = CYLINDER;
                 this->operator[]("smf") = SMF;
                 this->operator[]("obj") = OBJ;
                 this->operator[]("sensor") = SENSOR;
@@ -91,11 +98,16 @@ namespace nikita {
                 this->operator[]("lookat") = LOOKAT;
                 this->operator[]("scale") = SCALE;
                 this->operator[]("point") = POINT;
+                this->operator[]("spot") = SPOT;
                 this->operator[]("vector") = VECTOR;
                 this->operator[]("transform") = TRANSFORM;
                 this->operator[]("matte") = MATTE;
+                this->operator[]("texture") = TEXTURE;
+                this->operator[]("image") = IMAGE;
+                this->operator[]("procedural") = PROCEDURAL;
                 this->operator[]("phong") = PHONG;
                 this->operator[]("reflective") = REFLECTIVE;
+                this->operator[]("transparent") = TRANSPARENT;
                 this->operator[]("light") = LIGHT;
                 this->operator[]("ambient") = AMBIENT;
                 this->operator[]("accelerator") = ACCELERATOR;

@@ -43,6 +43,7 @@ set(SOURCE_FILES
         core/ray.cpp
         core/ray.h
         numerical/quadratic.h
+        numerical/quadratic.cpp
         core/scene.cpp
         core/scene.h
         core/renderer/renderer.cpp
@@ -67,9 +68,22 @@ set(SOURCE_FILES
         core/primitive.h
         core/shading/surfaceShader.cpp
         core/shading/surfaceShader.h
-        core/material.cpp
-        core/material.h
-        core/accelerator/bvh.cpp core/accelerator/bvh.h)
+        core/shading/material.cpp
+        core/shading/material.h
+        core/accelerator/bvh.cpp
+        core/accelerator/bvh.h
+        core/shapes/cylinder.cpp
+        core/shapes/cylinder.h
+        core/texture/texture.cpp
+        core/texture/texture.h
+        core/texture/textureMapping.cpp
+        core/texture/textureMapping.h
+        core/texture/imageTexture.cpp
+        core/texture/imageTexture.h
+        util/image.cpp
+        util/image.h
+        core/texture/fbmNoise.cpp
+        core/texture/fbmNoise.h)
 
 set(TEST_SOURCE_FILES
         test/main.cpp

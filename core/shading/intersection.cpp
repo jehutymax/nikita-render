@@ -14,6 +14,7 @@ nikita::Intersection::Intersection(const Intersection &i)
     : hit(i.hit),
       prim(i.prim),
       hitPoint(i.hitPoint),
+      localHitPoint(i.localHitPoint),
       normal(i.normal),
       ray(i.ray),
       rayDepth(i.rayDepth),

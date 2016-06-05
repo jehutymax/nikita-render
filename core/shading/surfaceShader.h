@@ -30,10 +30,14 @@ public:
     virtual Color Li(const ScenePtr scene, const IntersectionPtr ip) const;
 };
 
+class TransparentShader : public SimpleShader
+{
+public:
+    virtual Color Li(const ScenePtr scene, const IntersectionPtr ip) const;
+};
+
 typedef std::shared_ptr<SurfaceShader> ShaderPtr;
 
-
-Color surfaceReflect(const ScenePtr scene, const RendererPtr renderer, IntersectionPtr ip);
 }
 
 #endif //NIKITA_RENDER_SURFACESHADER_H

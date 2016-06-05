@@ -10,6 +10,9 @@
 #include "../ray.h"
 #include "../shading/intersection.h"
 #include "../accelerator/BoundingBox.h"
+#include "../../numerical/quadratic.h"
+
+#include <math.h>
 
 namespace nikita
 {

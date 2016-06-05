@@ -5,9 +5,9 @@
 #ifndef NIKITA_RENDER_MATERIAL_H
 #define NIKITA_RENDER_MATERIAL_H
 
-#include "color.h"
-#include "shading/bxdf.h"
-#include "light/light.h"
+#include "../color.h"
+#include "bxdf.h"
+#include "../light/light.h"
 
 namespace nikita
 {
@@ -18,6 +18,7 @@ public:
     virtual BRDFPtr getDiffuse() = 0;
     virtual BRDFPtr getSpecular() = 0;
     virtual BRDFPtr getReflective();
+    virtual BRDFPtr getTransparent();
 };
 
 class Matte : public Material
@@ -35,6 +36,23 @@ public:
 private:
     LambertianPtr ambient;
     LambertianPtr diffuse;
+};
+
+class PositionMatte : public Material
+{
+public:
+    PositionMatte();
+    void setKa(float k);
+    void setKd(float k);
+    void setCd(const TexturePtr &c);
+
+    virtual BRDFPtr getAmbient();
+    virtual BRDFPtr getDiffuse();
+    virtual BRDFPtr getSpecular();
+
+private:
+    PositionLambertianPtr ambient;
+    PositionLambertianPtr diffuse;
 };
 
 class Phong : public Material
@@ -68,10 +86,28 @@ private:
     MirrorPtr mirror;
 };
 
+class Transparent : public Phong
+{
+public:
+    Transparent();
+    void setKt(float k);
+    void setIor(float i);
+    virtual void setCd(const Color &c);
+
+    virtual BRDFPtr getReflective();
+    virtual BRDFPtr getTransparent();
+private:
+    MirrorPtr mirror;
+    PerfectTransmitterPtr transmitter;
+
+};
+
 typedef std::shared_ptr<Material> MaterialPtr;
 typedef std::shared_ptr<Matte> MattePtr;
+typedef std::shared_ptr<PositionMatte> PositionMattePtr;
 typedef std::shared_ptr<Phong> PhongPtr;
 typedef std::shared_ptr<Reflective> ReflectivePtr;
+typedef std::shared_ptr<Transparent> TransparentPtr;
 
 }
 

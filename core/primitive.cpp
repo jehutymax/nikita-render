@@ -72,7 +72,6 @@ bool GeoPrim::intersect(Ray &ray, IntersectionPtr isect)
         ray.tMax = t;
         // finish completing the Intersection object.
         isect->prim = getPtr();
-        isect->rayDepth = ray.depth;
         isect->ray = ray;
     }
 

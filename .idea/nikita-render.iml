@@ -9,9 +9,11 @@
       <sourceFolder url="file://$MODULE_DIR$/test/TestNumerical.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test/TestReaders.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/util/mathUtils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/util/stringUtils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/util/sceneParser.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/util/mathUtils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/util/image.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/util/image.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/util/smfReader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/util/sceneParser.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/util/cpuTimer.h" isTestSource="false" />
@@ -25,7 +27,6 @@
       <sourceFolder url="file://$MODULE_DIR$/core/renderer/renderer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/ray.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/material.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sensor.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/sampler.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/scene.h" isTestSource="false" />
@@ -34,29 +35,41 @@
       <sourceFolder url="file://$MODULE_DIR$/core/sensor.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/ray.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/scene.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/nikita.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/fbmNoise.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/textureMapping.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/texture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/imageTexture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/texture.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/textureMapping.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/fbmNoise.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/texture/imageTexture.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/light/light.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/light/light.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shading/bxdf.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/shading/intersection.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shading/surfaceShader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shading/intersection.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shading/material.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shading/material.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shading/surfaceShader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shading/intersection.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shading/bxdf.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/camera.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/color.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/primitive.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/material.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/color.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/nikita.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/transform.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/camera.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/shapes/sphere.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shapes/cylinder.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shapes/triangleMesh.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shapes/shape.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shapes/sphere.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shapes/sphere.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/core/shapes/cylinder.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/shapes/triangleMesh.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/core/shapes/triangleMesh.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/numerical/quadratic.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/numerical/quadratic.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

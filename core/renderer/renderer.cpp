@@ -10,6 +10,8 @@ using nikita::Renderer;
 using nikita::SimpleRenderer;
 using nikita::SuperSamplerRenderer;
 
+float counter = 0;
+
 // SimpleRenderer
 SimpleRenderer::SimpleRenderer(CameraPtr camera)
     : camera(camera),
@@ -28,7 +30,7 @@ void SimpleRenderer::render(const ScenePtr scene)
     {
         CameraSample s(sample.imageX, sample.imageY);
 //        int vectorIndex = sampler->getFlatImageCoordinate();
-        int vectorIndex = sample.imageY * camera->film->resolutionX + sample.imageX;
+        int vectorIndex = int(sample.imageY * camera->film->resolutionX + sample.imageX);
         Ray ray;
         camera->generateRay(s, &ray);
         result[vectorIndex] = shootRay(scene, ray);
@@ -61,8 +63,8 @@ nikita::Color SimpleRenderer::shootRay(const ScenePtr scene, Ray &ray, int)
 SuperSamplerRenderer::SuperSamplerRenderer(CameraPtr camera)
     : camera(camera),
       sampler(std::make_shared<Sampler>(0, camera->film->resolutionX, 0, camera->film->resolutionY, /* spp */ 1)),
-      shader(std::make_shared<ReflectiveShader>()),
-      maxDepth(3), threshold(0.001f), maxBounces(3)
+      shader(std::make_shared<TransparentShader>()),
+      maxDepth(3), threshold(0.001f), maxBounces(5)
 { }
 
 void SuperSamplerRenderer::render(const ScenePtr scene)
@@ -118,6 +120,7 @@ void SuperSamplerRenderer::render(const ScenePtr scene)
 
     }
     t.stop();
+    std::cout << "Number of primary rays: " << counter << std::endl;
     camera->film->writeImage(result);
 }
 
@@ -236,7 +239,7 @@ nikita::Color SuperSamplerRenderer::processRay(CameraSample s)
     Ray ray;
     camera->generateRay(s, &ray);
     result = shootRay(scene, ray);
-
+    counter++;
     return result;
 }
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0" background="0.2,0.2,0.2">
+        <accelerator type="bvh" leafSize="1"/>
+        <light type="point">
+            <float name="intensity" value="0.99"/>
+            <color value="0.98,0.98,0.98"/>
+            <transform name="LightToWorld">
+                <translate x="-1" y="10" z="-1"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.95"/>
+            <color value="0.98,0.97,0.96"/>
+        </light>
+        <shape type="sphere">
+            <float name="radius" value="0.6"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="2.8" z="-3"/>
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="kr" value="0.99"/>
+                <float name="exp" value="2"/>
+                <color value="0.44,0.44,0.77"/>
+            </material>
+        </shape>
+         <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="2" y="0.8" z="-3"/>
+            </transform>
+            <material type="transparent">
+                <float name="ka" value="0.4"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.8"/>
+                <float name="kr" value="0.1"/>
+                <float name="kt" value="0.9"/>
+                <float name="ior" value="1.0"/>
+                <float name="exp" value="9"/>
+                <color value="0.66,0.66,0.66"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.8"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="-1" y="3" z="-3"/>
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.2"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.25"/>
+                <float name="kr" value="0.99"/>
+                <float name="exp" value="8"/>
+                <color value="0.98,0.01,0.01"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="test/teapot.smf"/>
+            <transform name="toWorld">
+                <rotate y="1" angle="120"/>
+                <scale value="0.4"/>
+                <translate x="2.0" y="0" z="4.0"/>
+            </transform>
+            <material type="transparent">
+                <float name="ka" value="0.23125"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.6"/>
+                <float name="kr" value="0.1"/>
+                <float name="kt" value="0.9"/>
+                <float name="ior" value="1.0"/>
+                <float name="exp" value="6.0"/>
+                <color value="0.4,0.3,0.0.8"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <rotate y="1" angle="150"/>
+                <scale value="1.8"/>
+                <translate y="0.5"/>
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.23125"/>
+                <float name="kd" value="0.4"/>
+                <float name="ks" value="0.6"/>
+                <float name="kr" value="15.0"/>
+                <float name="exp" value="6.0"/>
+                <color value="0.99,0.65,0.01"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="test/teddy.smf"/>
+            <transform name="toWorld">
+                <scale value="0.05"/>
+                <rotate y="1" angle="150"/>
+                <translate x="-80" y="20" z="20"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.4"/>
+                <float name="kd" value="0.8"/>
+                <float name="ks" value="0.40"/>
+                <color value="0.2,0.35,0.4"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="test/floor.smf"/>
+            <transform name="toWorld">
+            </transform>
+            <material type="reflective">
+                <float name="ka" value="0.3"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.1"/>
+                <float name="kr" value="0.12"/>
+                <float name="exp" value="6"/>
+                <color value="0.2,0.98,0.21"/>
+            </material>
+        </shape>
+        <sensor type="perspective">
+            <transform name="toWorld">
+                <lookat origin="2, 3, -8" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <film type="png">
+                <integer name="width" value="1080"/>
+                <integer name="height" value="1080"/>
+                <string name="filename" value="test/full_test.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>

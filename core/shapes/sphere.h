@@ -5,12 +5,7 @@
 #ifndef NIKITA_RENDER_SPHERE_H
 #define NIKITA_RENDER_SPHERE_H
 
-#include <math.h>
-
-#include "../nikita.h"
 #include "shape.h"
-#include "../accelerator/BoundingBox.h"
-#include "../../util/mathUtils.h"
 
 namespace nikita
 {
@@ -22,7 +17,7 @@ public:
     Sphere(const TransformPtr obj2World, const TransformPtr world2Obj,
         float radius, float z0, float z1, float phi); // support for partial spheres.
 
-    BoundingBox objectBound() const; // implemented, not tested, not in use.
+    BoundingBox objectBound() const; // implemented, tested, in use.
 
     bool isIntersectable();
     bool intersect(const Ray &ray, float *t, IntersectionPtr ip) const;
@@ -34,7 +29,7 @@ private:
     float zMin, zMax;
     float thetaMin, thetaMax; // derived information
 
-    bool calculateIntersection(const Ray &ray, float *t) const;
+    bool calculateIntersection(const Ray &ray, float *t, float k = 0) const;
 };
 }
 

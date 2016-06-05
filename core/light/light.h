@@ -23,8 +23,7 @@ public:
     virtual void setColor(const Color &color) = 0;
     virtual void setIntensity(float intensity) = 0;
     virtual Vector getDirection(const Point &p) = 0;
-    virtual Color getRadiance() = 0;
-    virtual Color getPower() = 0;
+    virtual Color getRadiance(const Point &p) = 0;
 
     virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const = 0;
 
@@ -41,8 +40,7 @@ class PointLight : public Light
 public:
     PointLight(const TransformPtr &light2World, int nSamples);
     virtual Vector getDirection(const Point &p);
-    virtual Color getRadiance();
-    virtual Color getPower();
+    virtual Color getRadiance(const Point &p);
     virtual void setIntensity(float intensity);
     virtual void setColor(const Color &color);
     virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const;
@@ -52,13 +50,36 @@ private:
     float lightIntensity;
 };
 
+class SpotLight : public Light
+{
+public:
+    SpotLight(const TransformPtr &light2World,
+              const Color &color,
+              float intensity,
+              float width,
+              float decay);
+    virtual Vector getDirection(const Point &p);
+    virtual Color getRadiance(const Point &p);
+    virtual void setIntensity(float intensity);
+    virtual void setColor(const Color &color);
+    virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const;
+private:
+    Point lightPosition;
+    Color lightColor;
+    float lightIntensity;
+    float cosTotalWidth;
+    float cosDecayBegin;
+
+    float evaluateDecay(const Vector &w) const;
+
+};
+
 class AmbientLight : public Light
 {
 public:
     AmbientLight(const TransformPtr, int);
     virtual Vector getDirection(const Point &p);
-    virtual Color getRadiance();
-    virtual Color getPower();
+    virtual Color getRadiance(const Point &p);
     virtual void setIntensity(float intensity);
     virtual void setColor(const Color &color);
     virtual bool testVisibility(Ray &ray, PrimPtr primGroup) const;
@@ -70,6 +91,7 @@ private:
 
 typedef std::shared_ptr<Light> LightPtr;
 typedef std::shared_ptr<PointLight> PointLightPtr;
+typedef std::shared_ptr<SpotLight> SpotLightPtr;
 typedef std::shared_ptr<AmbientLight> AmbientLightPtr;
 
 }

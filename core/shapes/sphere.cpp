@@ -3,9 +3,8 @@
 //
 
 #include "sphere.h"
-#include "../../numerical/quadratic.h"
 
-const float kEpsilon = 1e-3f;
+const float kEpsilon = 1e-5f;
 using nikita::Sphere;
 
 Sphere::Sphere(const TransformPtr obj2World, const TransformPtr world2Obj, float radius)
@@ -48,13 +47,14 @@ bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
     //transform incoming ray to object-space
     ray = (*worldToObject)(r);
 
-    bool hit = calculateIntersection(r, t);
+    bool hit = calculateIntersection(r, t, kEpsilon);
 
     if (hit) {
         // fill Intersection object
         ip->hit = true;
-        ip->hitPoint = r(*t);
         ip->normal = (ray.origin + (*t) * ray.direction) / this->radius;
+        ip->hitPoint = r(*t); // + (kEpsilon * ip->normal);
+//        ip->localHitPoint = ray(*t);
     }
 
     return hit;
@@ -62,10 +62,10 @@ bool Sphere::intersect(const Ray &r, float *t, IntersectionPtr ip) const
 
 bool Sphere::intersectP(const Ray &r, float *t) const
 {
-    return calculateIntersection(r, t);
+    return calculateIntersection(r, t, kEpsilon);
 }
 
-bool Sphere::calculateIntersection(const Ray &r, float *t) const
+bool Sphere::calculateIntersection(const Ray &r, float *t, float k) const
 {
     nikita::Ray ray;
     //transform incoming ray to object-space
@@ -115,7 +115,7 @@ bool Sphere::calculateIntersection(const Ray &r, float *t) const
             return false;
     }
 
-    if (hit > kEpsilon) {
+    if (hit > k) {
         *t = hit;
         return true;
     }

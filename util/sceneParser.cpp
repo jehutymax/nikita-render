@@ -4,6 +4,8 @@
 
 #include "sceneParser.h"
 #include "../core/accelerator/bvh.h"
+#include "../core/texture/imageTexture.h"
+#include "../core/texture/fbmNoise.h"
 
 using nikita::sceneParser;
 sceneParser::SceneTagMap sceneParser::sceneTags;
@@ -86,6 +88,9 @@ void sceneParser::processShape(const OIIO::pugi::xml_node &node)
     {
         case SPHERE:
             createSphere(node);
+            break;
+        case CYLINDER:
+            createCylinder(node);
             break;
         case SMF:
             createTriangleMesh(node);
@@ -178,12 +183,26 @@ nikita::MaterialPtr sceneParser::processMaterial(const OIIO::pugi::xml_node &nod
             float kd;
             if (!getFloat(materialNode, "kd", &kd))
                 kd = 0;
-            Color cd = getColor(materialNode);
-            MattePtr matte = std::make_shared<Matte>();
-            matte->setKa(ka);
-            matte->setKd(kd);
-            matte->setCd(cd);
-            return MaterialPtr(matte);
+            // does it use a texture?
+            if (hasTexture(materialNode))
+            {
+                PositionMattePtr matte = std::make_shared<PositionMatte>();
+                TexturePtr cd = processTexture(materialNode);
+                matte->setKa(ka);
+                matte->setKd(kd);
+                matte->setCd(cd);
+                return MaterialPtr(matte);
+            }
+            else
+            {
+                MattePtr matte = std::make_shared<Matte>();
+                Color cd = getColor(materialNode);
+                matte->setKa(ka);
+                matte->setKd(kd);
+                matte->setCd(cd);
+                return MaterialPtr(matte);
+            }
+
         }
         case PHONG: {
             float ka;
@@ -233,11 +252,97 @@ nikita::MaterialPtr sceneParser::processMaterial(const OIIO::pugi::xml_node &nod
             whitted->setKr(kr);
             return MaterialPtr(whitted);
         }
+        case TRANSPARENT: {
+            float ka;
+            if (!getFloat(materialNode, "ka", &ka))
+                ka = 0;
+            float kd;
+            if (!getFloat(materialNode, "kd", &kd))
+                kd = 0;
+            float ks;
+            if (!getFloat(materialNode, "ks", &ks))
+                ks = 0;
+            float kt;
+            if (!getFloat(materialNode, "kt", &kt))
+                kt = 0;
+            float ior;
+            if (!getFloat(materialNode, "ior", &ior))
+                ior = 1.f;
+            float exp;
+            if (!getFloat(materialNode, "exp", &exp))
+                exp = 6;
+            Color cd = getColor(materialNode);
+            TransparentPtr whitted = std::make_shared<Transparent>();
+            whitted->setKa(ka);
+            whitted->setKd(kd);
+            whitted->setKs(ks);
+            whitted->setExp(exp);
+            whitted->setCd(cd);
+            whitted->setKt(kt);
+            whitted->setIor(ior);
+            return MaterialPtr(whitted);
+        }
         default:
             std::cout << getType(node) << " not understood." << std::endl;
             return nullptr;
     }
 
+}
+
+nikita::TexturePtr sceneParser::processTexture(const Node &node)
+{
+    Node textureNode;
+    if (node.name() == "texture")
+        textureNode = node;
+    else if (hasTexture(node))
+        textureNode = node.child("texture");
+
+    switch(sceneTags.at(getType(textureNode)))
+    {
+        case IMAGE:
+            return processImageTexture(textureNode);
+        case PROCEDURAL:
+            return processProceduralTexture(textureNode);
+        default:
+            return nullptr;
+    }
+}
+
+nikita::TexturePtr sceneParser::processImageTexture(const Node &textureNode)
+{
+    std::string file;
+    getString(textureNode, "filename", &file);
+
+    ImageTexturePtr tex = std::make_shared<ImageTexture>();
+    ImagePtr img = std::make_shared<Image>(file);
+    // for now, assume sphere
+    TextureMappingPtr map = std::make_shared<Spherical>();
+
+    tex->setImage(img);
+    tex->setMapping(map);
+    return tex;
+}
+
+nikita::TexturePtr sceneParser::processProceduralTexture(const Node &textureNode)
+{
+    Color c = getColor(textureNode);
+    float octaves = (getFloat(textureNode, "octaves", &octaves) ? octaves : 1.0f);
+    float gain = (getFloat(textureNode, "gain", &gain) ? gain : 0.5f);
+    float lacunarity = (getFloat(textureNode, "lacunarity", &lacunarity) ? lacunarity : 2.0f);
+    float min = (getFloat(textureNode, "min", &min) ? min : -1.0f);
+    float max = (getFloat(textureNode, "max", &max) ? max : 1.0f);
+
+    LinearNoisePtr noise = std::make_shared<LinearNoise>();
+    noise->setOctaves(octaves);
+    noise->setGain(gain);
+    noise->setLacunarity(lacunarity);
+
+    FBMTexturePtr fbm = std::make_shared<FBMTexture>();
+    fbm->setNoiseMaker(noise);
+    fbm->setBounds(min, max);
+    fbm->setColor(c);
+
+    return fbm;
 }
 
 void sceneParser::processLight(const Node &node)
@@ -251,6 +356,16 @@ void sceneParser::processLight(const Node &node)
             PointLightPtr pp = std::make_shared<PointLight>(lightTransform, 1);
             pp->setIntensity(intensity);
             pp->setColor(c);
+            this->scene->lights.push_back(LightPtr(pp));
+            break;
+        }
+        case SPOT: {
+            Color c = getColor(node);
+            float intensity = (getFloat(node, "intensity", &intensity) ? intensity : 0.0f);
+            float cutoff = (getFloat(node, "cutoffAngle", &cutoff) ? cutoff : 20.0f);
+            float width = (getFloat(node, "beamWidth", &width) ? width : 0.75f * cutoff);
+            TransformPtr lightTransform = processTransform(node);
+            SpotLightPtr pp = std::make_shared<SpotLight>(lightTransform, c, intensity, cutoff, width);
             this->scene->lights.push_back(LightPtr(pp));
             break;
         }
@@ -439,6 +554,11 @@ bool sceneParser::hasMaterial(const Node &parent)
     return hasChildByName(parent, "material");
 }
 
+bool sceneParser::hasTexture(const Node &parent)
+{
+    return hasChildByName(parent, "texture");
+}
+
 bool sceneParser::hasColor(const Node &parent)
 {
     return hasChildByName(parent, "color");
@@ -478,6 +598,33 @@ void sceneParser::createSphere(const OIIO::pugi::xml_node &node)
     MaterialPtr materialPtr = processMaterial(node);
 
     objects.push_back(std::make_shared<GeoPrim>(spherePtr, materialPtr));
+}
+
+void sceneParser::createCylinder(const Node &node)
+{
+    Node radiusNode = node.find_child_by_attribute("name", "radius");
+    float radius, phi, zmin, zmax;
+    if (radiusNode)
+        radius = std::stof(radiusNode.attribute("value").value());
+    else
+        radius = 2.0;
+
+    if (!getFloat(node, "phi", &phi))
+        phi = 360.0;
+
+    if (!getFloat(node, "zmin", &zmin))
+        zmin = -radius;
+
+    if (!getFloat(node, "zmax", &zmax))
+        zmax = radius;
+
+    // Get a transform for the sphere
+    TransformPtr pt = processTransform(node);
+    TransformPtr ptInv = std::make_shared<Transform>(pt->getInv());
+    ShapePtr cylinderPtr = std::make_shared<Cylinder>(pt, ptInv, radius, zmin, zmax, phi);
+    MaterialPtr materialPtr = processMaterial(node);
+
+    objects.push_back(std::make_shared<GeoPrim>(cylinderPtr, materialPtr));
 }
 
 void sceneParser::createTriangleMesh(const OIIO::pugi::xml_node &node)

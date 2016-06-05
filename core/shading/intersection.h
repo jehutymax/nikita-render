@@ -21,6 +21,7 @@ public:
     bool hit;               // does this represent a hit?
     GeoPrimPtr prim;        // primitive containing the hit object
     Point hitPoint;         // hit point in world coordinates
+    Point localHitPoint;    // hit point in object coordinates
     Normal normal;          // normal at hit point
     Ray ray;                // required for specular highlights
     int rayDepth;           // used for recursion
