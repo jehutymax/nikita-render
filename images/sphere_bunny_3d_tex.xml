@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nikita version="0.1">
+    <scene version="0.5.0" background="0.0,0.8,0.82">
+        <accelerator type="bvh" leafSize="1"/>
+        <!--<light type="point">-->
+            <!--<float name="intensity" value="0.99"/>-->
+            <!--<color value="0.98,0.98,0.98"/>-->
+            <!--<transform name="LightToWorld">-->
+                <!--<translate x="-1" y="5" z="-1"/>-->
+            <!--</transform>-->
+        <!--</light>-->
+        <light type="spot">
+            <float name="intensity" value="30.0"/>
+            <float name="cutoffAngle" value="25"/>
+            <float name="beamWidth" value="18"/>
+            <color value="0.98,0.98,0.98"/>
+            <transform name="LightToWorld">
+                <lookat origin="-3, 4, -5" target="0, 0, 0" up="1, 0, 0"/>
+            </transform>
+        </light>
+        <light type="ambient">
+            <float name="intensity" value="0.6"/>
+            <color value="0.98,0.97,0.96"/>
+        </light>
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/floor.smf"/>
+            <transform name="toWorld">
+                <translate y="-1.01"/>
+            </transform>
+            <material type="phong">
+                <float name="ka" value="0.3"/>
+                <float name="kd" value="0.6"/>
+                <float name="ks" value="0.1"/>
+                <float name="kr" value="0.99"/>
+                <float name="exp" value="6"/>
+                <color value="0.88,0.88,0.88"/>
+            </material>
+        </shape>
+        <shape type="sphere">
+            <float name="radius" value="1.0"/>
+            <float name="phi" value="360.0"/>
+            <transform name="toWorld">
+                <translate x="0" y="0" z="0"/>
+            </transform>
+            <material type="matte">
+                <texture type="image">
+                    <string name="filename" value="/Users/rafael/Projects/nikita-render/test/EarthTM0360.jpg"/>
+                </texture>
+                <float name="ka" value="0.25"/>
+                <float name="kd" value="0.85"/>
+                <color value="0.99,0.98,0.99"/>
+            </material>
+        </shape>
+        <shape type="smf">
+            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
+            <transform name="toWorld">
+                <rotate y="1" angle="150"/>
+                <scale value="1.2"/>
+                <!--<translate y="-0.35"/>-->
+                <translate x="-0.6" y="0.6" z="1.2"/>
+            </transform>
+            <material type="matte">
+                <texture type="procedural">
+                    <float name="octaves" value="3.0"/>
+                    <float name="gain" value="1.25"/>
+                    <float name="lacunarity" value="4.0"/>
+                    <float name="min" value="-0.1"/>
+                    <float name="max" value="3.0"/>
+                    <color value="0.25,0.35,0.28"/>
+                </texture>
+                <float name="ka" value="0.23"/>
+                <float name="kd" value="1.00"/>
+                <color value="0.99,0.99,0.99"/>
+            </material>
+        </shape>
+
+        <sensor type="perspective">
+            <transform name="toWorld">
+                <lookat origin="0, 3, -5" target="0, 0, 0" up="0, 1, 0"/>
+            </transform>
+            <float name="fov" value="60"/>
+            <sampler type="simple">
+                <integer name="sampleCount" value="1"/>
+            </sampler>
+            <film type="png">
+                <integer name="width" value="1080"/>
+                <integer name="height" value="1080"/>
+                <string name="filename" value="/Users/rafael/Projects/nikita-render/test/spheres_bunnies_simple.png"/>
+            </film>
+        </sensor>
+    </scene>
+</nikita>
