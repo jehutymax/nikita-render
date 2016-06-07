@@ -8,7 +8,7 @@
 #include <string>
 
 namespace nikita {
-    const std::string version = "0.1 - Week 2";
+    const std::string version = "0.1";
 }
 
 #endif //NIKITA_RENDER_VERSION_H

@@ -1,9 +1,7 @@
 #include "core/nikita.h"
-
 #include "util/sceneParser.h"
-#include "util/smfReader.h"
-#include "version.h"
 #include "core/renderer/renderer.h"
+#include "version.h"
 
 int main(int argc, char* argv[]) {
     std::cout << "Nikita Renderer" << std::endl;
@@ -23,8 +21,6 @@ int main(int argc, char* argv[]) {
     nikita::sceneParser parser;
     parser.loadFile(std::string(argv[1]));
     nikita::ScenePtr scene = parser.getScene();
-
-//    nikita::SimpleRenderer renderer(parser.getCamera());
 
     nikita::RendererPtr ssr = std::make_shared<nikita::SuperSamplerRenderer>(parser.getCamera());
     ssr->render(scene);

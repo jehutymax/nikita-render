@@ -13,10 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f953faa3-9601-484e-b5fa-ee9f5b862d03" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/spheres_bunnies_spotlight.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/texture/fbmNoise.cpp" afterPath="$PROJECT_DIR$/core/texture/fbmNoise.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/spheres_with_bunnies_simple.xml" afterPath="$PROJECT_DIR$/test/spheres_with_bunnies_simple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version.h" afterPath="$PROJECT_DIR$/version.h" />
     </list>
     <ignored path="nikita-render.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,26 +35,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bxdf.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/shading/bxdf.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="86" column="103" selection-start-line="86" selection-start-column="103" selection-end-line="86" selection-end-column="103" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bxdf.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/shading/bxdf.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="129" column="34" selection-start-line="129" selection-start-column="26" selection-end-line="129" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="material.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/shading/material.cpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -87,12 +65,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spheres_with_bunnies_simple.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="spheres_with_bunnies_simple.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/spheres_with_bunnies_simple.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
               <caret line="46" column="104" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="version.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/version.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -142,9 +142,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/core/nikita.h" />
         <option value="$PROJECT_DIR$/core/material.h" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/core/renderer/renderer.h" />
         <option value="$PROJECT_DIR$/core/material.cpp" />
         <option value="$PROJECT_DIR$/core/accelerator/bvh.h" />
@@ -193,6 +191,8 @@
         <option value="$PROJECT_DIR$/test/spheres_with_bunnies_bvh.xml" />
         <option value="$PROJECT_DIR$/core/texture/fbmNoise.cpp" />
         <option value="$PROJECT_DIR$/test/spheres_with_bunnies_simple.xml" />
+        <option value="$PROJECT_DIR$/version.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
   </component>
@@ -682,22 +682,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/renderer/renderer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="88" column="19" selection-start-line="88" selection-start-column="19" selection-end-line="88" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/primitive.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -1096,6 +1080,24 @@
         <state relative-caret-position="480">
           <caret line="46" column="104" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
