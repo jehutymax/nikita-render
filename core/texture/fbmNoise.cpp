@@ -37,7 +37,7 @@ LatticeNoise::LatticeNoise() :
     gain(0.5)
 {
     initializeLookupTable(seed);
-    fbmMax = (1.f - std::powf(gain, numberOctaves)) / (1.f - gain);
+    fbmMax = (1.f - powf(gain, numberOctaves)) / (1.f - gain);
     fbmMin = -fbmMax;
 }
 
@@ -75,7 +75,7 @@ float LatticeNoise::getTurbulenceValue(const Point &p) const
     float turbulence = 0.f;
 
     for (int i = 0; i < numberOctaves; ++i) {
-        turbulence += amplitude * std::fabsf(getNoiseValue(frequency * p));
+        turbulence += amplitude * fabsf(getNoiseValue(frequency * p));
         amplitude *= 0.5f;
         frequency *= 2.f;
     }

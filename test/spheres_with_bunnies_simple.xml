@@ -2,13 +2,13 @@
 <nikita version="0.1">
     <scene version="0.5.0" background="0.0,0.8,0.82">
         <accelerator type="bvh" leafSize="1"/>
-        <!--<light type="point">-->
-            <!--<float name="intensity" value="0.99"/>-->
-            <!--<color value="0.98,0.98,0.98"/>-->
-            <!--<transform name="LightToWorld">-->
-                <!--<translate x="-1" y="5" z="-1"/>-->
-            <!--</transform>-->
-        <!--</light>-->
+        <light type="point">
+            <float name="intensity" value="0.99"/>
+            <color value="0.98,0.98,0.98"/>
+            <transform name="LightToWorld">
+                <translate x="-1" y="5" z="-1"/>
+            </transform>
+        </light>
         <light type="spot">
             <float name="intensity" value="30.0"/>
             <float name="cutoffAngle" value="25"/>
@@ -51,28 +51,28 @@
                 <color value="0.99,0.98,0.99"/>
             </material>
         </shape>
-        <shape type="smf">
-            <string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>
-            <transform name="toWorld">
-                <rotate y="1" angle="150"/>
-                <scale value="1.2"/>
-                <!--<translate y="-0.35"/>-->
-                <translate x="-0.6" y="0.6" z="1.2"/>
-            </transform>
-            <material type="matte">
-                <texture type="procedural">
-                    <float name="octaves" value="3.0"/>
-                    <float name="gain" value="1.25"/>
-                    <float name="lacunarity" value="4.0"/>
-                    <float name="min" value="-0.1"/>
-                    <float name="max" value="3.0"/>
-                    <color value="0.25,0.35,0.28"/>
-                </texture>
-                <float name="ka" value="0.23"/>
-                <float name="kd" value="1.00"/>
-                <color value="0.99,0.99,0.99"/>
-            </material>
-        </shape>
+        <!--<shape type="smf">-->
+            <!--<string name="filename" value="/Users/rafael/Projects/nikita-render/test/bunny_1k.smf"/>-->
+            <!--<transform name="toWorld">-->
+                <!--<rotate y="1" angle="150"/>-->
+                <!--<scale value="1.2"/>-->
+                <!--&lt;!&ndash;<translate y="-0.35"/>&ndash;&gt;-->
+                <!--<translate x="-0.6" y="0.6" z="1.2"/>-->
+            <!--</transform>-->
+            <!--<material type="matte">-->
+                <!--<texture type="procedural">-->
+                    <!--<float name="octaves" value="3.0"/>-->
+                    <!--<float name="gain" value="1.25"/>-->
+                    <!--<float name="lacunarity" value="4.0"/>-->
+                    <!--<float name="min" value="-0.1"/>-->
+                    <!--<float name="max" value="3.0"/>-->
+                    <!--<color value="0.25,0.35,0.28"/>-->
+                <!--</texture>-->
+                <!--<float name="ka" value="0.23"/>-->
+                <!--<float name="kd" value="1.00"/>-->
+                <!--<color value="0.99,0.99,0.99"/>-->
+            <!--</material>-->
+        <!--</shape>-->
 
         <sensor type="perspective">
             <transform name="toWorld">
